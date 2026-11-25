@@ -2,7 +2,7 @@
 
 ## Daftar Isi
 
-- Bagian 1 — Panduan Implementasi dan Operasi NSE 1–8
+- Bagian 1 — Panduan Implementasi dan Operasi NSE 1–8 [Bagian 1 — Panduan Implementasi dan Operasi NSE 1–8](https://github.com/anggrdwjy/Library-Fortinet-NSE/blob/main/README.md#bagian-1--panduan-implementasi-dan-operasi-nse-18)
 - Bagian 2 — Studi Kasus Implementasi dan Operasi Firewall
 - Bagian 3 — Contoh Konfigurasi FortiOS v6 dan v7
 
