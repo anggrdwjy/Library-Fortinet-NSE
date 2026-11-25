@@ -7,8 +7,6 @@
 - Bagian 3 — Contoh Konfigurasi FortiOS v6 dan v7
 - Lampiran — Perintah Diagnostik dan Standar Penamaan
 
----
-
 # Bagian 1 — Panduan Implementasi dan Operasi NSE 1–8
 
 ## Modul 1 — NSE 1: Cybersecurity Fundamentals
@@ -70,7 +68,6 @@ Rendah    : Spam, pemindaian port tunggal, upaya phishing yang gagal
 | Insiden berulang pada unit yang sama | Pelatihan tidak menyasar perilaku | Lakukan pelatihan berbasis peran, bukan pelatihan umum |
 | Pencadangan ikut terenkripsi | Pencadangan terhubung terus menerus | Terapkan pencadangan terisolasi dan uji pemulihan |
 
----
 
 ## Modul 2 — NSE 2: NGFW Basics
 
@@ -160,7 +157,6 @@ Periksa FortiView untuk melihat aplikasi teratas, sumber teratas, dan ancaman te
 | Trafik HTTPS tidak terlihat | Inspeksi SSL belum aktif | Terapkan profil SSL-SSH pada kebijakan |
 | Kinerja menurun setelah inspeksi | Mode proxy digunakan pada perangkat kecil | Gunakan flow-based inspection dan sesuaikan profil |
 
----
 
 ## Modul 3 — NSE 3: FortiGate Operator
 
@@ -248,7 +244,6 @@ Periksa setiap hari: status HA, status lisensi, status disk log, penggunaan CPU 
 | Pencadangan gagal | Ruang penyimpanan penuh | Periksa server TFTP dan rotasi file |
 | Firmware gagal diperbarui | Jalur peningkatan tidak berurutan | Ikuti jalur peningkatan resmi FortiOS |
 
----
 
 ## Modul 4 — NSE 4: FortiOS Administrator
 
@@ -570,7 +565,6 @@ diagnose firewall proute list
 | HA tidak sinkron | Versi firmware berbeda | Samakan versi dan periksa heartbeat |
 | SSL VPN login gagal | Grup pengguna salah | Periksa grup pada kebijakan dan portal |
 
----
 
 ## Modul 5 — NSE 5: Secure Networking atau SASE Administrator
 
@@ -680,7 +674,6 @@ Periksa status instalasi Policy Package di FortiManager. Pastikan tidak ada Fort
 | Log tidak muncul di FortiAnalyzer | ADOM tidak cocok | Samakan ADOM dan perangkat terkelola |
 | ZTNA ditolak | Tag endpoint tidak sesuai | Periksa profil EMS dan tag endpoint |
 
----
 
 ## Modul 6 — NSE 6: Advanced Endpoint Protection dan Data Security
 
@@ -910,7 +903,6 @@ diagnose debug flow filter daddr 172.16.10.10
 | Trafik OT terblokir | Protokol belum diizinkan | Periksa kebijakan dan signature IPS |
 | Biaya WAN meningkat | Aturan SD-WAN salah | Periksa prioritas anggota dan mode |
 
----
 
 ## Modul 8 — NSE 8: Expert Design dan Troubleshooting
 
@@ -993,7 +985,6 @@ diagnose log test
 | Masalah hanya pada satu aplikasi | Isolasi dengan debug flow dan periksa profil keamanan aplikasi tersebut |
 | Masalah setelah perubahan | Kembalikan perubahan terakhir dan uji secara bertahap |
 
----
 
 # Bagian 2 — Studi Kasus Implementasi dan Operasi Firewall
 
@@ -1181,7 +1172,6 @@ Setelah implementasi, seluruh trafik internet tercatat dengan identitas kebijaka
 | Log tidak muncul di FortiAnalyzer | Rute ke manajemen terblokir | Periksa rute dan port 514 |
 | Server tidak dapat diakses dari LAN | Objek alamat salah | Periksa subnet DMZ dan kebijakan |
 
----
 
 ## Studi Kasus 2 — Migrasi Firewall Lama ke FortiGate Tanpa Gangguan Layanan
 
@@ -1280,7 +1270,6 @@ Migrasi selesai dalam 2 jam 10 menit. Seluruh layanan kritis berfungsi. Dua kebi
 | VPN cabang tidak terbentuk | Proposal tidak cocok | Samakan proposal Phase 1 dan Phase 2 |
 | Email tertunda | Kebijakan SMTP belum mengizinkan relay | Periksa VIP dan kebijakan WAN ke DMZ |
 
----
 
 ## Studi Kasus 3 — Implementasi High Availability dan SD-WAN Dual ISP
 
@@ -1430,7 +1419,6 @@ Setelah implementasi, gangguan ISP tunggal tidak lagi menghentikan layanan. Vide
 | SD-WAN tidak berpindah | Health-check tidak berjalan | Periksa gateway dan server health-check |
 | Sesi terputus saat failover | Session pickup tidak aktif | Aktifkan session-pickup pada konfigurasi HA |
 
----
 
 ## Studi Kasus 4 — Operasi Harian: Internet Lambat dan Tabel Sesi Penuh
 
@@ -1548,7 +1536,6 @@ Gangguan berlangsung 35 menit. Tanpa isolasi yang cepat, gangguan dapat berlangs
 | Sesi tidak berkurang | Sesi lama tidak kedaluwarsa | Sesuaikan waktu kedaluwarsa sesi |
 | Pengguna sah ikut terblokir | Pembatasan terlalu ketat | Sesuaikan ambang DoS dan traffic shaper |
 
----
 
 ## Studi Kasus 5 — Operasi Keamanan: Deteksi Malware dan Respons Insiden
 
@@ -1648,7 +1635,6 @@ Penyebaran berhasil dihentikan pada empat workstation. Tidak ada server yang ter
 | Workstation bersih tetapi alert tetap muncul | Sesi lama masih aktif | Bersihkan sesi dengan filter dan periksa ulang log |
 | Email phishing lolos | DMARC belum reject | Aktifkan DMARC reject setelah periode monitor |
 
----
 
 ## Studi Kasus 6 — Implementasi VPN Antar Cabang dan Akses Jarak Jauh
 
@@ -1798,7 +1784,6 @@ Seluruh cabang terhubung melalui VPN yang terpantau. Waktu penanganan gangguan V
 | SSL VPN login berhasil tetapi tidak dapat mengakses ERP | Kebijakan salah | Periksa grup dan alamat tujuan pada kebijakan |
 | VPN sering terputus | DPD atau NAT timeout | Sesuaikan DPD dan waktu kedaluwarsa |
 
----
 
 ## Studi Kasus 7 — Implementasi DMZ, Server Publik, dan Proteksi Aplikasi Web
 
@@ -1931,7 +1916,6 @@ Setelah implementasi, upaya SQL injection menurun dan tidak ada lagi upaya yang 
 | Server DMZ dapat mengakses internet | Kebijakan deny tidak berada di akhir | Tempatkan kebijakan deny setelah kebijakan yang diizinkan |
 | Database tidak dapat diakses dari DMZ | Port tidak diizinkan | Periksa kebijakan DMZ ke LAN |
 
----
 
 # Bagian 3 — Contoh Konfigurasi FortiOS v6 dan v7
 
