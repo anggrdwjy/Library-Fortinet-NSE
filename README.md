@@ -1,38 +1,31 @@
 # Panduan Lengkap Implementasi dan Operasi NSE 1–8, Studi Kasus Firewall, dan Contoh Konfigurasi FortiOS v6 dan v7
 
-## Daftar Isi
-
-- Bagian 1 — Panduan Implementasi dan Operasi NSE 1–8
-- Bagian 2 — Studi Kasus Implementasi dan Operasi Firewall
-- Bagian 3 — Contoh Konfigurasi FortiOS v6 dan v7
-- Lampiran — Perintah Diagnostik dan Standar Penamaan
-
 # Bagian 1 — Panduan Implementasi dan Operasi NSE 1–8
 
 ## Modul 1 — NSE 1: Cybersecurity Fundamentals
 
 ### Tujuan
 
-Peserta mampu menjelaskan lanskap ancaman, mengklasifikasikan jenis serangan, membedakan kerahasiaan, integritas, dan ketersediaan, serta menjelaskan peran Security Fabric dalam pertahanan berlapis.
+Peserta mampu menjelaskan threat landscape, mengklasifikasikan jenis attack, membedakan kerahasiaan, integritas, dan ketersediaan, serta menjelaskan peran Security Fabric dalam pertahanan berlapis.
 
 ### Konsep Kunci
 
 | Konsep | Penjelasan |
 | --- | --- |
-| CIA Triad | Confidentiality, Integrity, Availability sebagai dasar tujuan keamanan |
-| Threat Actor | Pelaku ancaman, mulai dari peretas oportunistik hingga kelompok terorganisasi |
+| CIA Triad | Confidentiality, Integrity, Availability sebagai dasar tujuan security |
+| Threat Actor | Pelaku threat, mulai dari peretas oportunistik hingga kelompok terorganisasi |
 | Attack Surface | Seluruh titik yang dapat dieksploitasi, termasuk endpoint, aplikasi, dan identitas |
 | Zero Trust | Prinsip tidak ada kepercayaan implisit, verifikasi dilakukan secara berkelanjutan |
-| Security Fabric | Integrasi produk keamanan untuk berbagi intelijen ancaman dan respons otomatis |
+| Security Fabric | Integrasi produk security untuk berbagi threat intelligence dan respons otomatis |
 
 ### Implementasi
 
-1. Lakukan inventarisasi aset. Catat seluruh perangkat, aplikasi, akun istimewa, dan data sensitif.
+1. Lakukan inventarisasi aset. Catat seluruh device, aplikasi, akun istimewa, dan data sensitif.
 2. Klasifikasikan data berdasarkan dampak kebocoran. Contoh: data publik, data internal, data rahasia.
-3. Petakan ancaman terhadap setiap aset. Contoh: phishing untuk akun pengguna, ransomware untuk file server, DDoS untuk layanan publik.
-4. Tentukan kontrol yang sesuai. Contoh: MFA untuk akun istimewa, pencadangan terisolasi untuk ransomware, rate limiting untuk DDoS.
-5. Susun program kesadaran keamanan. Materi mencakup phishing, kata sandi, penggunaan USB, dan pelaporan insiden.
-6. Tentukan jalur eskalasi insiden. Setiap pengguna mengetahui kepada siapa insiden dilaporkan dan dalam jangka waktu yang ditetapkan.
+3. Petakan threat terhadap setiap aset. Contoh: phishing untuk akun user, ransomware untuk file server, DDoS untuk layanan publik.
+4. Tentukan kontrol yang sesuai. Contoh: MFA untuk akun istimewa, isolated backup untuk ransomware, rate limiting untuk DDoS.
+5. Susun program security awareness. Materi mencakup phishing, password, penggunaan USB, dan pelaporan insiden.
+6. Tentukan jalur eskalasi insiden. Setiap user mengetahui kepada siapa insiden dilaporkan dan dalam jangka waktu yang ditetapkan.
 
 ### Contoh Implementasi
 
@@ -42,13 +35,13 @@ Klasifikasi insiden yang digunakan dalam operasi harian:
 Kritis    : Ransomware aktif, eksfiltrasi data, kendali domain dikuasai
 Tinggi    : Phishing berhasil pada akun istimewa, malware pada server
 Sedang    : Percobaan login brute force masif, malware pada satu endpoint
-Rendah    : Spam, pemindaian port tunggal, upaya phishing yang gagal
+Rendah    : Spam, scanning port tunggal, upaya phishing yang gagal
 ```
 
 ### Operasi dan Verifikasi
 
-- Periksa laporan phishing yang masuk setiap hari dan ukur rasio pelaporan pengguna.
-- Periksa status pencadangan dan lakukan uji pemulihan berkala.
+- Periksa laporan phishing yang masuk setiap hari dan ukur rasio pelaporan user.
+- Periksa status backup dan lakukan uji recovery berkala.
 - Periksa akun yang tidak aktif lebih dari 90 hari dan nonaktifkan akun tersebut.
 - Periksa hasil simulasi phishing dan tindak lanjuti unit dengan rasio klik tertinggi melalui pelatihan tambahan.
 
@@ -56,40 +49,40 @@ Rendah    : Spam, pemindaian port tunggal, upaya phishing yang gagal
 
 **Situasi:** Sebuah organisasi menerima email yang menyerupai faktur dari pemasok. Satu staf keuangan membuka lampiran dan mengaktifkan makro. Dalam waktu 20 menit, file di workstation mulai terenkripsi.
 
-**Analisis:** Insiden diklasifikasikan sebagai Kritis karena ransomware aktif. Jalur eskalasi diaktifkan. Workstation diisolasi dari jaringan. Akun pengguna dinonaktifkan sementara. Pencadangan yang terisolasi digunakan untuk pemulihan.
+**Analisis:** Insiden diklasifikasikan sebagai Kritis karena ransomware aktif. Jalur eskalasi diaktifkan. Workstation diisolasi dari network. Akun user dinonaktifkan sementara. Backup yang terisolasi digunakan untuk recovery.
 
-**Tindakan Perbaikan:** Makro diblokir melalui kebijakan endpoint, lampiran berbahaya diblokir melalui FortiMail, pelatihan phishing diulang untuk unit keuangan, dan aturan FortiGate diperketat untuk memblokir komunikasi ke domain command and control.
+**Tindakan Perbaikan:** Makro diblokir melalui policy endpoint, lampiran berbahaya diblokir melalui FortiMail, pelatihan phishing diulang untuk unit keuangan, dan aturan FortiGate diperketat untuk memblokir komunikasi ke domain command and control.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab yang Mungkin | Tindakan |
 | --- | --- | --- |
-| Pengguna tidak melaporkan phishing | Jalur pelaporan tidak jelas | Sosialisasikan tombol pelaporan dan prosedur eskalasi |
+| User tidak melaporkan phishing | Jalur pelaporan tidak jelas | Sosialisasikan tombol pelaporan dan prosedur eskalasi |
 | Insiden berulang pada unit yang sama | Pelatihan tidak menyasar perilaku | Lakukan pelatihan berbasis peran, bukan pelatihan umum |
-| Pencadangan ikut terenkripsi | Pencadangan terhubung terus menerus | Terapkan pencadangan terisolasi dan uji pemulihan |
+| Backup ikut terenkripsi | Backup terhubung terus menerus | Terapkan isolated backup dan uji recovery |
 
 
 ## Modul 2 — NSE 2: NGFW Basics
 
 ### Tujuan
 
-Peserta mampu menjelaskan perbedaan firewall tradisional dan Next Generation Firewall, fungsi inspeksi mendalam, serta peran FortiGate dalam Security Fabric.
+Peserta mampu menjelaskan perbedaan firewall tradisional dan Next Generation Firewall, fungsi deep inspection, serta peran FortiGate dalam Security Fabric.
 
 ### Konsep Kunci
 
 | Konsep | Penjelasan |
 | --- | --- |
-| Stateful Firewall | Memeriksa status koneksi dan hanya mengizinkan trafik yang sesuai dengan sesi yang sah |
-| NGFW | Menambahkan identifikasi aplikasi, identifikasi pengguna, IPS, antivirus, dan filtering web |
-| Profile-Based Mode | Profil keamanan diterapkan pada kebijakan firewall secara terpisah |
-| Policy-Based Mode | Profil keamanan diterapkan langsung di dalam kebijakan |
-| Security Fabric | Pertukaran intelijen ancaman antar FortiGate, FortiAnalyzer, FortiManager, dan FortiClient |
+| Stateful Firewall | Memeriksa status koneksi dan hanya mengizinkan traffic yang sesuai dengan session yang sah |
+| NGFW | Menambahkan identifikasi aplikasi, identifikasi user, IPS, antivirus, dan filtering web |
+| Profile-Based Mode | Security profile diterapkan pada firewall policy secara terpisah |
+| Policy-Based Mode | Security profile diterapkan langsung di dalam policy |
+| Security Fabric | Pertukaran threat intelligence antar FortiGate, FortiAnalyzer, FortiManager, dan FortiClient |
 
 ### Implementasi
 
-1. Tentukan mode inspeksi yang digunakan. Untuk operasi yang konsisten, gunakan Profile-Based Mode pada awal implementasi.
-2. Aktifkan inspeksi SSL untuk trafik terenkripsi sesuai kebijakan organisasi.
-3. Terapkan profil keamanan secara bertahap. Mulai dari mode monitor pada IPS dan Application Control, kemudian ubah ke mode block setelah periode observasi.
+1. Tentukan mode inspection yang digunakan. Untuk operasi yang konsisten, gunakan Profile-Based Mode pada awal implementasi.
+2. Aktifkan SSL inspection untuk encrypted traffic sesuai organizational policy.
+3. Terapkan security profile secara bertahap. Mulai dari mode monitor pada IPS dan Application Control, kemudian ubah ke mode block setelah periode observasi.
 4. Hubungkan FortiGate ke FortiAnalyzer untuk visibilitas log terpusat.
 5. Hubungkan FortiGate ke Security Fabric melalui FortiManager atau FortiGate root.
 
@@ -119,7 +112,7 @@ end
 
 config firewall ssl-ssh-profile
     edit "deep-inspection"
-        set comment "Digunakan sesuai kebijakan privasi organisasi"
+        set comment "Digunakan sesuai privacy policy organisasi"
         config ssl
             set inspect-all enable
         end
@@ -139,47 +132,47 @@ diagnose debug enable
 diagnose debug disable
 ```
 
-Periksa FortiView untuk melihat aplikasi teratas, sumber teratas, dan ancaman teratas. Pastikan tidak ada aplikasi berisiko tinggi yang lolos tanpa profil.
+Periksa FortiView untuk melihat aplikasi teratas, sumber teratas, dan threat teratas. Pastikan tidak ada aplikasi berisiko tinggi yang lolos tanpa profile.
 
 ### Studi Kasus
 
-**Situasi:** Trafik menuju internet meningkat, tetapi log hanya menampilkan port 443 tanpa informasi aplikasi. Tim tidak dapat membedakan trafik aplikasi bisnis dan trafik streaming video.
+**Situasi:** Traffic menuju internet meningkat, tetapi log hanya menampilkan port 443 tanpa informasi aplikasi. Tim tidak dapat membedakan traffic aplikasi bisnis dan traffic streaming video.
 
-**Analisis:** FortiGate masih bekerja seperti firewall tradisional karena Application Control belum diterapkan. Inspeksi SSL belum diaktifkan sehingga aplikasi dalam trafik terenkripsi tidak terlihat.
+**Analisis:** FortiGate masih bekerja seperti firewall tradisional karena Application Control belum diterapkan. SSL inspection belum diaktifkan sehingga aplikasi dalam encrypted traffic tidak terlihat.
 
-**Penyelesaian:** Application Control diaktifkan dalam mode monitor selama tujuh hari. Setelah profil aplikasi bisnis dan non bisnis terpetakan, kebijakan dibuat untuk memprioritaskan aplikasi bisnis dan membatasi streaming. Inspeksi SSL diterapkan pada kelompok pengguna yang telah menyetujui kebijakan.
+**Penyelesaian:** Application Control diaktifkan dalam mode monitor selama tujuh hari. Setelah profile aplikasi bisnis dan non bisnis terpetakan, policy dibuat untuk memprioritaskan aplikasi bisnis dan membatasi streaming. SSL inspection diterapkan pada kelompok user yang telah menyetujui policy.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab yang Mungkin | Tindakan |
 | --- | --- | --- |
-| Aplikasi tidak terdeteksi | Application Control belum diterapkan | Terapkan profil pada kebijakan yang sesuai |
-| Trafik HTTPS tidak terlihat | Inspeksi SSL belum aktif | Terapkan profil SSL-SSH pada kebijakan |
-| Kinerja menurun setelah inspeksi | Mode proxy digunakan pada perangkat kecil | Gunakan flow-based inspection dan sesuaikan profil |
+| Aplikasi tidak terdeteksi | Application Control belum diterapkan | Terapkan profile pada policy yang sesuai |
+| Traffic HTTPS tidak terlihat | SSL inspection belum aktif | Terapkan SSL-SSH profile pada policy |
+| Kinerja menurun setelah inspection | Mode proxy digunakan pada device kecil | Gunakan flow-based inspection dan sesuaikan profile |
 
 
 ## Modul 3 — NSE 3: FortiGate Operator
 
 ### Tujuan
 
-Peserta mampu melakukan operasi harian FortiGate, membaca log dan FortiView, melakukan pencadangan dan pemulihan, mengelola firmware, serta melakukan triase awal gangguan.
+Peserta mampu melakukan operasi harian FortiGate, membaca log dan FortiView, melakukan backup dan recovery, mengelola firmware, serta melakukan triase awal gangguan.
 
 ### Konsep Kunci
 
 | Konsep | Penjelasan |
 | --- | --- |
-| FortiView | Visualisasi trafik, aplikasi, ancaman, dan pengguna secara waktu nyata |
-| Log dan Event | Rekaman aktivitas kebijakan, keamanan, sistem, dan administrasi |
+| FortiView | Visualisasi traffic, aplikasi, threat, dan user secara waktu nyata |
+| Log dan Event | Rekaman aktivitas policy, security, sistem, dan administrasi |
 | Admin Profile | Pembatasan hak akses administrator berdasarkan peran |
 | Firmware Management | Pengelolaan versi FortiOS, termasuk peningkatan dan rollback |
-| Configuration Backup | Salinan konfigurasi untuk pemulihan dan audit |
+| Configuration Backup | Salinan konfigurasi untuk recovery dan audit |
 
 ### Implementasi
 
 1. Buat akun administrator berbasis peran. Administrator NOC hanya diberikan hak baca dan diagnostik. Administrator senior diberikan hak tulis.
-2. Aktifkan pencadangan terjadwal ke FortiManager atau server TFTP.
-3. Aktifkan pengiriman log ke FortiAnalyzer. Pastikan zona waktu dan NTP konsisten.
-4. Tentukan standar penamaan kebijakan. Contoh: `LAN-to-WAN-Web-Allow`.
+2. Aktifkan scheduled backup ke FortiManager atau server TFTP.
+3. Aktifkan pengiriman log ke FortiAnalyzer. Pastikan zone waktu dan NTP konsisten.
+4. Tentukan sindikasirdd penamaan policy. Contoh: `LAN-to-WAN-Web-Allow`.
 5. Tentukan prosedur perubahan. Setiap perubahan dicatat, diuji di jendela pemeliharaan, dan dapat dikembalikan.
 
 ### Contoh Konfigurasi
@@ -229,19 +222,19 @@ Periksa setiap hari: status HA, status lisensi, status disk log, penggunaan CPU 
 
 ### Studi Kasus
 
-**Situasi:** Pengguna melaporkan internet lambat pada pukul 09.00. Tidak ada perubahan konfigurasi yang tercatat pada malam sebelumnya.
+**Situasi:** User melaporkan internet lambat pada pukul 09.00. Tidak ada perubahan konfigurasi yang tercatat pada malam sebelumnya.
 
-**Analisis:** Operator memeriksa FortiView dan menemukan satu workstation menghasilkan ribuan sesi ke alamat eksternal. Pemeriksaan log menunjukkan aktivitas yang konsisten dengan malware. Penggunaan CPU FortiGate meningkat karena sesi yang berlebihan.
+**Analisis:** Operator memeriksa FortiView dan menemukan satu workstation menghasilkan ribuan session ke address eksternal. Pemeriksaan log menunjukkan aktivitas yang konsisten dengan malware. Penggunaan CPU FortiGate meningkat karena session yang berlebihan.
 
-**Penyelesaian:** Workstation diisolasi. Sesi dari workstation tersebut dibersihkan dengan filter alamat sumber. Kebijakan diperketat untuk membatasi jumlah sesi per alamat sumber. Insiden dieskalasikan ke tim keamanan untuk analisis endpoint.
+**Penyelesaian:** Workstation diisolasi. Session dari workstation tersebut dibersihkan dengan filter source address. Policy diperketat untuk membatasi jumlah session per source address. Insiden dieskalasikan ke tim security untuk analisis endpoint.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab yang Mungkin | Tindakan |
 | --- | --- | --- |
-| Log tidak sampai ke FortiAnalyzer | Rute atau port terblokir | Periksa konektivitas UDP 514 dan TCP 514 |
-| CPU tinggi | Sesi berlebihan atau inspeksi berat | Periksa sesi teratas dan sesuaikan profil |
-| Pencadangan gagal | Ruang penyimpanan penuh | Periksa server TFTP dan rotasi file |
+| Log tidak sampai ke FortiAnalyzer | Route atau port terblokir | Periksa konektivitas UDP 514 dan TCP 514 |
+| CPU tinggi | Session berlebihan atau inspection berat | Periksa session teratas dan sesuaikan profile |
+| Backup gagal | Ruang penyimpanan penuh | Periksa server TFTP dan rotasi file |
 | Firmware gagal diperbarui | Jalur peningkatan tidak berurutan | Ikuti jalur peningkatan resmi FortiOS |
 
 
@@ -251,20 +244,20 @@ Modul ini merupakan inti sertifikasi. Seluruh implementasi di modul lain bergant
 
 ### Tujuan
 
-Peserta mampu mengonfigurasi antarmuka, zona, kebijakan firewall, NAT, VPN, profil keamanan, autentikasi pengguna, dan high availability secara mandiri dan terdokumentasi.
+Peserta mampu mengonfigurasi interface, zone, firewall policy, NAT, VPN, security profile, user authentication, dan high availability secara mandiri dan terdokumentasi.
 
 ### Konsep Kunci
 
 | Konsep | Penjelasan |
 | --- | --- |
-| Zone | Pengelompokan antarmuka dengan tingkat kepercayaan yang sama |
-| Firewall Policy | Aturan yang menentukan trafik yang diizinkan atau ditolak antar zona |
-| NAT | Penerjemahan alamat, termasuk SNAT dan DNAT atau Virtual IP |
+| Zone | Pengelompokan interface dengan tingkat kepercayaan yang sama |
+| Firewall Policy | Aturan yang menentukan traffic yang diizinkan atau ditolak antar zone |
+| NAT | Penerjemahan address, termasuk SNAT dan DNAT atau Virtual IP |
 | UTM Profile | Antivirus, IPS, Web Filter, Application Control, DNS Filter, File Filter |
 | VPN | IPsec dan SSL VPN untuk konektivitas antar situs dan akses jarak jauh |
 | HA | High Availability Active-Passive atau Active-Active |
 
-### Implementasi Tahap 1 — Antarmuka dan Zona
+### Implementasi Tahap 1 — Interface dan Zone
 
 ```
 config system zone
@@ -290,9 +283,9 @@ config system interface
 end
 ```
 
-### Implementasi Tahap 2 — Kebijakan Firewall dan NAT
+### Implementasi Tahap 2 — Firewall Policy dan NAT
 
-Kebijakan ditulis dari yang paling spesifik ke yang paling umum. Kebijakan deny implisit berada pada akhir.
+Policy ditulis dari yang paling spesifik ke yang paling umum. Policy deny implisit berada pada akhir.
 
 ```
 config firewall address
@@ -419,7 +412,7 @@ config firewall policy
 end
 ```
 
-### Implementasi Tahap 5 — SSL VPN dan Autentikasi
+### Implementasi Tahap 5 — SSL VPN dan Authentication
 
 ```
 config user local
@@ -460,7 +453,7 @@ config firewall policy
 end
 ```
 
-### Implementasi Tahap 6 — Profil Keamanan yang Benar
+### Implementasi Tahap 6 — Profile Security yang Benar
 
 Contoh berikut menggunakan sintaks yang valid pada FortiOS v7. Pada FortiOS v6, struktur `config entries` pada IPS menggunakan pendekatan yang sama, tetapi opsi `block-malicious-url` dan `scan-botnet-connections` diatur pada level sensor.
 
@@ -548,23 +541,22 @@ diagnose firewall proute list
 
 ### Studi Kasus
 
-**Situasi:** Sebuah kantor cabang tidak dapat mengakses server di pusat setelah perubahan kebijakan firewall. Pengguna di pusat tetap dapat mengakses internet.
+**Situasi:** Sebuah kantor cabang tidak dapat mengakses server di pusat setelah perubahan firewall policy. User di pusat tetap dapat mengakses internet.
 
-**Analisis:** Pemeriksaan `diagnose debug flow` menunjukkan trafik dari cabang ditolak oleh kebijakan implisit. Alamat cabang belum dimasukkan ke objek alamat pada kebijakan VPN. Selain itu, rute statis menuju cabang mengarah ke antarmuka yang salah.
+**Analisis:** Pemeriksaan `diagnose debug flow` menunjukkan traffic dari cabang ditolak oleh policy implisit. Address cabang belum dimasukkan ke address object pada policy VPN. Selain itu, static route menuju cabang mengarah ke interface yang salah.
 
-**Penyelesaian:** Objek alamat cabang diperbaiki. Rute statis diperbaiki ke antarmuka VPN. Kebijakan VPN diperiksa ulang dan ditempatkan sebelum kebijakan deny. Pengujian dilakukan dari cabang ke server pusat dan sebaliknya. Perubahan didokumentasikan.
+**Penyelesaian:** Address object cabang diperbaiki. Static route diperbaiki ke interface VPN. Policy VPN diperiksa ulang dan ditempatkan sebelum policy deny. Pengujian dilakukan dari cabang ke server pusat dan sebaliknya. Perubahan didokumentasikan.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab yang Mungkin | Tindakan |
 | --- | --- | --- |
-| Trafik ditolak padahal kebijakan ada | Urutan kebijakan salah | Tempatkan kebijakan spesifik sebelum kebijakan umum |
-| NAT tidak bekerja | VIP bertabrakan dengan kebijakan | Periksa VIP, kebijakan, dan rute |
+| Traffic ditolak padahal policy ada | Urutan policy salah | Tempatkan policy spesifik sebelum policy umum |
+| NAT tidak bekerja | VIP bertabrakan dengan policy | Periksa VIP, policy, dan route |
 | VPN Phase 1 gagal | PSK atau proposal tidak cocok | Samakan proposal dan kunci pada kedua sisi |
-| VPN Phase 2 gagal | Selector trafik tidak cocok | Samakan jaringan sumber dan tujuan |
+| VPN Phase 2 gagal | Selector traffic tidak cocok | Samakan network sumber dan tujuan |
 | HA tidak sinkron | Versi firmware berbeda | Samakan versi dan periksa heartbeat |
-| SSL VPN login gagal | Grup pengguna salah | Periksa grup pada kebijakan dan portal |
-
+| SSL VPN login gagal | Grup user salah | Periksa grup pada policy dan portal |
 
 ## Modul 5 — NSE 5: Secure Networking atau SASE Administrator
 
@@ -576,17 +568,17 @@ Peserta mampu mengelola FortiGate secara terpusat melalui FortiManager, mengelol
 
 | Konsep | Penjelasan |
 | --- | --- |
-| ADOM | Administrative Domain untuk pemisahan kebijakan antar unit atau pelanggan |
-| Policy Package | Kumpulan kebijakan dan objek yang diinstal ke FortiGate |
-| FortiClient EMS | Manajemen terpusat untuk FortiClient pada endpoint |
-| ZTNA | Zero Trust Network Access berbasis identitas dan postur perangkat |
-| SASE | Penggabungan SD-WAN dan keamanan cloud dalam satu layanan |
+| ADOM | Administrative Domain untuk pemisahan policy antar unit atau pelanggan |
+| Policy Package | Kumpulan policy dan objek yang diinstal ke FortiGate |
+| FortiClient EMS | Management terpusat untuk FortiClient pada endpoint |
+| ZTNA | Zero Trust Network Access berbasis identitas dan postur device |
+| SASE | Penggabungan SD-WAN dan cloud security dalam satu layanan |
 
 ### Implementasi Tahap 1 — FortiManager
 
 1. Buat ADOM sesuai struktur organisasi. Contoh: ADOM HQ, ADOM Branch.
 2. Tambahkan FortiGate ke FortiManager. Pastikan FortiGate berada dalam mode managed.
-3. Buat objek alamat dan layanan bersama di ADOM.
+3. Buat address object dan layanan bersama di ADOM.
 4. Buat Policy Package dan instal ke FortiGate target.
 5. Aktifkan revisi dan lock sebelum instalasi untuk audit perubahan.
 
@@ -599,9 +591,9 @@ end
 
 ### Implementasi Tahap 2 — FortiAnalyzer
 
-1. Tambahkan FortiGate sebagai perangkat terkelola di FortiAnalyzer.
+1. Tambahkan FortiGate sebagai device terkelola di FortiAnalyzer.
 2. Aktifkan pengiriman log realtime.
-3. Buat laporan harian untuk kebijakan yang ditolak dan ancaman teratas.
+3. Buat laporan harian untuk policy yang ditolak dan threat teratas.
 4. Buat alert untuk peristiwa kritis seperti kegagalan login administrator dan deteksi IPS kritis.
 
 ```
@@ -615,9 +607,9 @@ end
 
 ### Implementasi Tahap 3 — FortiClient EMS dan ZTNA
 
-1. Buat profil endpoint di FortiClient EMS. Tentukan status antivirus, enkripsi disk, dan versi minimum.
-2. Buat tag endpoint berdasarkan kepatuhan. Contoh: tag `Compliant` untuk endpoint yang memenuhi standar.
-3. Buat kebijakan ZTNA di FortiGate yang hanya mengizinkan tag `Compliant`.
+1. Buat endpoint profile di FortiClient EMS. Tentukan status antivirus, enkripsi disk, dan versi minimum.
+2. Buat tag endpoint berdasarkan kepatuhan. Contoh: tag `Compliant` untuk endpoint yang memenuhi sindikasird.
+3. Buat policy ZTNA di FortiGate yang hanya mengizinkan tag `Compliant`.
 4. Uji akses dari endpoint yang patuh dan endpoint yang tidak patuh.
 
 ```
@@ -655,13 +647,13 @@ diagnose wad user list
 get system central-management
 ```
 
-Periksa status instalasi Policy Package di FortiManager. Pastikan tidak ada FortiGate yang tertinggal pada versi kebijakan lama.
+Periksa status instalasi Policy Package di FortiManager. Pastikan tidak ada FortiGate yang tertinggal pada versi policy lama.
 
 ### Studi Kasus
 
-**Situasi:** Tiga puluh FortiGate cabang perlu menerima perubahan kebijakan web filter dalam satu jendela pemeliharaan. Perubahan manual ke setiap perangkat memakan waktu dan rawan kesalahan.
+**Situasi:** Tiga puluh FortiGate cabang perlu menerima perubahan policy web filter dalam satu jendela pemeliharaan. Perubahan manual ke setiap device memakan waktu dan rawan kesalahan.
 
-**Analisis:** Setiap FortiGate dikelola secara mandiri sehingga perubahan tidak konsisten. Beberapa cabang menggunakan profil lama.
+**Analisis:** Setiap FortiGate dikelola secara mandiri sehingga perubahan tidak konsisten. Beberapa cabang menggunakan profile lama.
 
 **Penyelesaian:** Seluruh FortiGate dipindahkan ke FortiManager. Policy Package dibuat dan diinstal secara bertahap, dimulai dari dua cabang percontohan. Setelah verifikasi, instalasi dilanjutkan ke seluruh cabang. FortiAnalyzer digunakan untuk memverifikasi bahwa log web filter konsisten di seluruh cabang.
 
@@ -669,33 +661,32 @@ Periksa status instalasi Policy Package di FortiManager. Pastikan tidak ada Fort
 
 | Gejala | Penyebab yang Mungkin | Tindakan |
 | --- | --- | --- |
-| FortiGate offline di FortiManager | Konektivitas atau sertifikat | Periksa rute, port 541, dan otorisasi |
-| Instalasi Policy Package gagal | Objek tidak ditemukan | Periksa objek yang digunakan pada kebijakan |
-| Log tidak muncul di FortiAnalyzer | ADOM tidak cocok | Samakan ADOM dan perangkat terkelola |
-| ZTNA ditolak | Tag endpoint tidak sesuai | Periksa profil EMS dan tag endpoint |
-
+| FortiGate offline di FortiManager | Konektivitas atau sertifikat | Periksa route, port 541, dan authorization |
+| Instalasi Policy Package gagal | Objek tidak ditemukan | Periksa objek yang digunakan pada policy |
+| Log tidak muncul di FortiAnalyzer | ADOM tidak cocok | Samakan ADOM dan device terkelola |
+| ZTNA ditolak | Tag endpoint tidak sesuai | Periksa profile EMS dan tag endpoint |
 
 ## Modul 6 — NSE 6: Advanced Endpoint Protection dan Data Security
 
 ### Tujuan
 
-Peserta mampu mengimplementasikan perlindungan endpoint, keamanan email, keamanan aplikasi web, kontrol akses jaringan, dan perlindungan data sesuai dengan produk spesifik yang digunakan.
+Peserta mampu mengimplementasikan perlindungan endpoint, email security, web application security, kontrol akses network, dan perlindungan data sesuai dengan produk spesifik yang digunakan.
 
 ### Konsep Kunci
 
 | Produk | Fungsi Utama |
 | --- | --- |
 | FortiEDR | Deteksi dan respons endpoint berbasis perilaku |
-| FortiMail | Keamanan email, anti spam, anti phishing, dan enkripsi |
+| FortiMail | Security email, anti spam, anti phishing, dan enkripsi |
 | FortiWeb | Web Application Firewall untuk aplikasi web |
-| FortiNAC | Kontrol akses jaringan berbasis identitas dan postur perangkat |
+| FortiNAC | Kontrol akses network berbasis identitas dan postur device |
 | FortiDLP | Pencegahan kehilangan data dan klasifikasi data sensitif |
 
 ### Implementasi FortiEDR
 
 1. Pasang agen FortiEDR pada endpoint percontohan.
 2. Aktifkan mode simulasi selama tujuh hari untuk memetakan perilaku normal.
-3. Buat kebijakan isolasi untuk endpoint yang terinfeksi.
+3. Buat policy isolasi untuk endpoint yang terinfeksi.
 4. Hubungkan FortiEDR ke Security Fabric untuk berbagi intelijen.
 
 Verifikasi:
@@ -708,17 +699,17 @@ diagnose endpoint edr status
 
 1. Konfigurasikan FortiMail sebagai gateway email.
 2. Aktifkan pemeriksaan SPF, DKIM, dan DMARC.
-3. Buat kebijakan anti spam dan anti phishing.
-4. Buat kebijakan enkripsi untuk email yang memuat data sensitif.
+3. Buat policy anti spam dan anti phishing.
+4. Buat policy enkripsi untuk email yang memuat data sensitif.
 
-Konfigurasi pada FortiGate yang terintegrasi dengan FortiMail dilakukan melalui kebijakan dan profil, bukan melalui perintah `mailsetting` pada FortiGate. Perintah tersebut hanya berlaku pada FortiMail.
+Konfigurasi pada FortiGate yang terintegrasi dengan FortiMail dilakukan melalui policy dan profile, bukan melalui perintah `mailsetting` pada FortiGate. Perintah tersebut hanya berlaku pada FortiMail.
 
 ### Implementasi FortiWeb
 
-1. Buat profil perlindungan untuk aplikasi web.
+1. Buat profile perlindungan untuk aplikasi web.
 2. Aktifkan perlindungan SQL injection dan cross-site scripting.
 3. Aktifkan pembatasan laju permintaan untuk mencegah brute force.
-4. Uji dengan serangan simulasi pada lingkungan staging sebelum produksi.
+4. Uji dengan attack simulasi pada lingkungan staging sebelum produksi.
 
 Konfigurasi FortiWeb yang diterapkan:
 
@@ -732,64 +723,63 @@ Signature: High Severity Block, Medium Severity Alert
 ### Implementasi FortiNAC
 
 1. Hubungkan FortiNAC ke switch dan FortiGate.
-2. Buat profil perangkat untuk workstation, printer, kamera, dan perangkat IoT.
-3. Buat kebijakan akses berdasarkan peran. Perangkat IoT hanya dapat mengakses server yang ditentukan.
+2. Buat profile device untuk workstation, printer, kamera, dan IoT device.
+3. Buat policy akses berdasarkan peran. Device IoT hanya dapat mengakses server yang ditentukan.
 4. Aktifkan penilaian postur untuk workstation.
 
 ### Implementasi FortiDLP
 
 1. Klasifikasikan data sensitif. Contoh: nomor identitas, data keuangan, data kesehatan.
-2. Buat kebijakan yang memblokir pengiriman data sensitif melalui email dan unggahan web.
+2. Buat policy yang memblokir pengiriman data sensitif melalui email dan unggahan web.
 3. Aktifkan mode monitor sebelum mode block.
 
 ### Operasi dan Verifikasi
 
 - Periksa dashboard FortiEDR setiap hari untuk endpoint yang terisolasi.
 - Periksa karantina FortiMail dan lepaskan pesan yang sah setelah verifikasi.
-- Periksa log FortiWeb untuk serangan yang diblokir dan false positive.
+- Periksa log FortiWeb untuk attack yang diblokir dan false positive.
 - Periksa port yang tidak terotorisasi pada FortiNAC.
 
 ### Studi Kasus
 
 **Situasi:** Email phishing lolos ke kotak masuk keuangan. Email tersebut menyerupai email direksi dan meminta transfer dana. Di sisi lain, aplikasi web menerima upaya SQL injection.
 
-**Analisis:** FortiMail belum mengaktifkan DMARC. FortiWeb masih dalam mode monitor sehingga serangan tidak diblokir.
+**Analisis:** FortiMail belum mengaktifkan DMARC. FortiWeb masih dalam mode monitor sehingga attack tidak diblokir.
 
-**Penyelesaian:** DMARC diaktifkan dalam mode reject setelah periode monitor. Kebijakan FortiMail diperketat untuk email yang menyerupai domain internal. FortiWeb diubah ke mode block untuk aturan SQL injection. Pelatihan phishing dilakukan untuk unit keuangan.
+**Penyelesaian:** DMARC diaktifkan dalam mode reject setelah periode monitor. Policy FortiMail diperketat untuk email yang menyerupai domain internal. FortiWeb diubah ke mode block untuk aturan SQL injection. Pelatihan phishing dilakukan untuk unit keuangan.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab yang Mungkin | Tindakan |
 | --- | --- | --- |
-| FortiEDR memblokir aplikasi sah | Kebijakan terlalu ketat | Buat pengecualian berbasis hash aplikasi |
+| FortiEDR memblokir aplikasi sah | Policy terlalu ketat | Buat pengecualian berbasis hash aplikasi |
 | Email sah masuk karantina | Skor spam terlalu agresif | Sesuaikan ambang dan daftar pengirim tepercaya |
-| FortiWeb memblokir pengguna sah | False positive | Periksa log dan sesuaikan aturan |
-| Perangkat IoT tidak mendapat akses | Profil perangkat salah | Periksa klasifikasi FortiNAC |
+| FortiWeb memblokir legitimate user | False positive | Periksa log dan sesuaikan aturan |
+| Device IoT tidak mendapat akses | Profile device salah | Periksa klasifikasi FortiNAC |
 
----
 
 ## Modul 7 — NSE 7: Specialized Expert Tracks
 
 ### Tujuan
 
-Peserta mampu merancang SD-WAN, keamanan cloud, keamanan OT, dan firewall enterprise, serta melakukan troubleshooting pada arsitektur yang kompleks.
+Peserta mampu merancang SD-WAN, cloud security, OT security, dan firewall enterprise, serta melakukan troubleshooting pada arsitektur yang kompleks.
 
 ### Konsep Kunci
 
 | Jalur | Fokus |
 | --- | --- |
-| Enterprise Firewall | Desain kebijakan skala besar, segmentasi, dan troubleshooting mendalam |
+| Enterprise Firewall | Desain policy skala besar, segmentasi, dan troubleshooting mendalam |
 | SD-WAN | Pemilihan jalur berbasis kinerja, BGP, dan overlay |
-| Cloud Security | FortiGate VM, FortiWeb Cloud, keamanan multi cloud |
-| OT Security | Segmentasi jaringan operasional, FortiGate Rugged, dan protokol industri |
+| Cloud Security | FortiGate VM, FortiWeb Cloud, security multi cloud |
+| OT Security | Segmentasi network operasional, FortiGate Rugged, dan protokol industri |
 | LAN Edge | FortiSwitch, FortiAP, dan FortiNAC dalam satu fabric |
 
 ### Implementasi SD-WAN
 
 1. Tentukan anggota SD-WAN. Contoh: port1 sebagai ISP utama, port5 sebagai ISP cadangan.
 2. Tentukan Performance SLA. Contoh: latensi maksimum 100 ms dan packet loss maksimum 2 persen.
-3. Buat aturan SD-WAN. Aplikasi bisnis diprioritaskan ke jalur dengan latensi terendah. Trafik backup diarahkan ke jalur dengan biaya terendah.
-4. Buat kebijakan firewall dari zona SD-WAN ke zona LAN.
+3. Buat aturan SD-WAN. Aplikasi bisnis diprioritaskan ke jalur dengan latensi terendah. Traffic backup diarahkan ke jalur dengan biaya terendah.
+4. Buat firewall policy dari SD-WAN zone ke LAN zone.
 
 ```
 config system sdwan
@@ -860,19 +850,19 @@ config router bgp
 end
 ```
 
-### Implementasi Keamanan Cloud
+### Implementasi Security Cloud
 
-1. Sebar FortiGate VM di cloud dengan dua antarmuka: antarmuka publik dan antarmuka privat.
-2. Terapkan kebijakan yang sama dengan pusat melalui FortiManager.
+1. Sebar FortiGate VM di cloud dengan dua interface: public interface dan private interface.
+2. Terapkan policy yang sama dengan pusat melalui FortiManager.
 3. Aktifkan log ke FortiAnalyzer Cloud.
 4. Terapkan segmentasi antara VPC produksi dan VPC pengembangan.
 
-### Implementasi Keamanan OT
+### Implementasi Security OT
 
-1. Segmentasikan jaringan IT dan OT melalui zona dan kebijakan deny by default.
+1. Segmentasikan network IT dan OT melalui zone dan policy deny by default.
 2. Izinkan hanya protokol industri yang diperlukan. Contoh: Modbus TCP hanya dari workstation SCADA ke PLC.
 3. Terapkan IPS dengan signature OT.
-4. Batasi akses manajemen OT hanya dari jump host.
+4. Batasi akses management OT hanya dari jump host.
 
 ### Operasi dan Verifikasi
 
@@ -890,17 +880,17 @@ diagnose debug flow filter daddr 172.16.10.10
 
 **Situasi:** Kantor cabang menggunakan dua ISP. Aplikasi video conference sering terputus ketika ISP utama mengalami latensi tinggi. Failover manual memakan waktu hingga 10 menit.
 
-**Analisis:** Pemilihan jalur masih berbasis rute statis. Tidak ada Performance SLA sehingga FortiGate tidak mengetahui penurunan kualitas jalur.
+**Analisis:** Pemilihan jalur masih berbasis static route. Tidak ada Performance SLA sehingga FortiGate tidak mengetahui penurunan kualitas jalur.
 
-**Penyelesaian:** SD-WAN diaktifkan dengan Performance SLA. Aplikasi video conference diarahkan ke jalur dengan latensi terendah secara otomatis. Failover terjadi dalam hitungan detik. BGP digunakan untuk pertukaran rute dengan pusat. Setelah implementasi, gangguan video conference menurun dan waktu failover menjadi kurang dari lima detik.
+**Penyelesaian:** SD-WAN diaktifkan dengan Performance SLA. Aplikasi video conference diarahkan ke jalur dengan latensi terendah secara otomatis. Failover terjadi dalam hitungan detik. BGP digunakan untuk pertukaran route dengan pusat. Setelah implementasi, gangguan video conference menurun dan waktu failover menjadi kurang dari lima detik.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab yang Mungkin | Tindakan |
 | --- | --- | --- |
 | SD-WAN tidak berpindah jalur | SLA tidak terpenuhi | Periksa health-check dan ambang SLA |
-| BGP tidak terbentuk | AS atau alamat tetangga salah | Periksa remote-as dan konektivitas |
-| Trafik OT terblokir | Protokol belum diizinkan | Periksa kebijakan dan signature IPS |
+| BGP tidak terbentuk | AS atau address tetangga salah | Periksa remote-as dan konektivitas |
+| Traffic OT terblokir | Protokol belum diizinkan | Periksa policy dan signature IPS |
 | Biaya WAN meningkat | Aturan SD-WAN salah | Periksa prioritas anggota dan mode |
 
 
@@ -908,7 +898,7 @@ diagnose debug flow filter daddr 172.16.10.10
 
 ### Tujuan
 
-Peserta mampu merancang arsitektur keamanan end to end, mempertahankannya dalam sesi desain, serta memecahkan masalah kompleks yang melibatkan banyak produk dan banyak situs.
+Peserta mampu merancang arsitektur security end to end, mempertahankannya dalam session desain, serta memecahkan masalah kompleks yang melibatkan banyak produk dan banyak situs.
 
 ### Konsep Kunci
 
@@ -918,17 +908,17 @@ Peserta mampu merancang arsitektur keamanan end to end, mempertahankannya dalam 
 | Kumpulkan Bukti | Log, FortiView, debug flow, status HA, status BGP, status VPN |
 | Bentuk Hipotesis | Susun tiga hipotesis yang paling mungkin berdasarkan bukti |
 | Uji Hipotesis | Uji satu per satu, mulai dari yang paling mudah dibuktikan |
-| Perbaiki dan Verifikasi | Perbaiki akar masalah, bukan gejala, dan uji dari sisi pengguna |
+| Perbaiki dan Verifikasi | Perbaiki akar masalah, bukan gejala, dan uji dari sisi user |
 | Dokumentasikan | Catat akar masalah, perubahan, dan pencegahan |
 
 ### Implementasi Metodologi Perancangan
 
 1. Pahami kebutuhan bisnis. Tentukan aplikasi kritis, toleransi gangguan, dan kewajiban kepatuhan.
-2. Petakan arus trafik. Gambarkan arus dari pengguna ke aplikasi, dari cabang ke pusat, dari cloud ke pusat data.
-3. Tentukan model kepercayaan. Tentukan zona, segmentasi, dan kebijakan identitas.
+2. Petakan arus traffic. Gambarkan arus dari user ke aplikasi, dari cabang ke pusat, dari cloud ke pusat data.
+3. Tentukan model kepercayaan. Tentukan zone, segmentasi, dan policy identitas.
 4. Pilih arsitektur. Tentukan penempatan FortiGate, FortiManager, FortiAnalyzer, FortiWeb, FortiMail, dan FortiNAC.
-5. Tentukan ketahanan. Tentukan HA, redundansi WAN, redundansi daya, dan rencana pemulihan.
-6. Tentukan operasi. Tentukan pemantauan, pencadangan, manajemen perubahan, dan pelatihan.
+5. Tentukan ketahanan. Tentukan HA, redundansi WAN, redundansi daya, dan rencana recovery.
+6. Tentukan operasi. Tentukan monitoring, backup, change management, dan pelatihan.
 
 ### Contoh Konfigurasi Desain
 
@@ -937,8 +927,8 @@ Desain tidak ditulis sebagai satu blok konfigurasi, melainkan sebagai kumpulan k
 ```
 Keputusan 1: HA Active-Passive dipilih karena aplikasi ERP tidak mendukung
              load balancing stateful pada level firewall.
-Keputusan 2: Flow-based inspection dipilih karena perangkat harus menangani
-             5.000 sesi bersamaan dengan latensi rendah.
+Keputusan 2: Flow-based inspection dipilih karena device harus menangani
+             5.000 concurrent session dengan latensi rendah.
 Keputusan 3: ZTNA dipilih untuk akses ERP jarak jauh, bukan SSL VPN penuh,
              karena akses harus dibatasi per aplikasi.
 ```
@@ -961,19 +951,19 @@ diagnose log test
 
 - Video conference terputus menunjukkan masalah Performance SLA atau pemilihan jalur yang tidak tepat.
 - Email tertunda menunjukkan kemungkinan FortiMail mengantre karena pemeriksaan DMARC yang baru diaktifkan.
-- Aplikasi ERP lambat menunjukkan kemungkinan inspeksi SSL yang membebani FortiGate atau rute BGP yang tidak optimal.
+- Aplikasi ERP lambat menunjukkan kemungkinan SSL inspection yang membebani FortiGate atau BGP route yang tidak optimal.
 
 **Pengujian:**
 
 - `diagnose sys sdwan health-check` menunjukkan latensi ISP utama naik hingga 250 ms, tetapi aturan SD-WAN masih memaksa video conference ke jalur tersebut.
 - Antrean FortiMail menunjukkan penundaan karena server DNS eksternal tidak merespons.
-- `diagnose debug flow` untuk ERP menunjukkan sesi melewati jalur yang lebih panjang karena preferensi BGP.
+- `diagnose debug flow` untuk ERP menunjukkan session melewati jalur yang lebih panjang karena preferensi BGP.
 
 **Penyelesaian:**
 
 - Aturan SD-WAN diperbaiki ke mode SLA sehingga video conference berpindah otomatis.
 - Server DNS FortiMail diperbaiki dan ditambahkan DNS cadangan.
-- Preferensi BGP disesuaikan dan rute ERP diperpendek.
+- Preferensi BGP disesuaikan dan route ERP diperpendek.
 - Seluruh perubahan diuji dari cabang, pusat, dan cloud. Dokumentasi diperbarui dan prosedur migrasi diperbaiki.
 
 ### Penyelesaian Masalah Tingkat Expert
@@ -982,7 +972,7 @@ diagnose log test
 | --- | --- |
 | Masalah intermiten | Korelasikan waktu kejadian dengan perubahan, log, dan metrik kinerja |
 | Masalah hanya pada satu cabang | Bandingkan konfigurasi cabang tersebut dengan cabang yang sehat |
-| Masalah hanya pada satu aplikasi | Isolasi dengan debug flow dan periksa profil keamanan aplikasi tersebut |
+| Masalah hanya pada satu aplikasi | Isolasi dengan debug flow dan periksa security profile aplikasi tersebut |
 | Masalah setelah perubahan | Kembalikan perubahan terakhir dan uji secara bertahap |
 
 
@@ -992,24 +982,24 @@ diagnose log test
 
 ### Situasi
 
-Sebuah kantor pusat dengan 120 pengguna belum memiliki firewall terpusat. Setiap divisi menggunakan router kecil tanpa inspeksi keamanan. Trafik internet tidak tercatat, tidak ada pemisahan antara jaringan pengguna dan server, dan tidak ada pencadangan konfigurasi. Manajemen meminta implementasi firewall yang mampu mengontrol akses internet, melindungi server, dan menyediakan log terpusat.
+Sebuah kantor pusat dengan 120 user belum memiliki firewall terpusat. Setiap divisi menggunakan router kecil tanpa inspection security. Traffic internet tidak tercatat, tidak ada pemisahan antara user network dan server, dan tidak ada configuration backup. Management meminta implementasi firewall yang mampu mengontrol akses internet, melindungi server, dan menyediakan log terpusat.
 
 Kondisi awal yang dicatat:
-- Pengguna: 120 workstation pada satu jaringan datar 10.10.10.0/24
-- Server: satu server file dan satu server aplikasi pada jaringan yang sama dengan pengguna
-- Internet: satu ISP dengan alamat 203.0.113.2/30
-- Perangkat: FortiGate 100F dengan FortiOS 7.2, FortiManager dan FortiAnalyzer tersedia pada jaringan manajemen 192.168.99.0/24
+- User: 120 workstation pada satu flat network 10.10.10.0/24
+- Server: satu server file dan satu server aplikasi pada network yang sama dengan user
+- Internet: satu ISP dengan address 203.0.113.2/30
+- Device: FortiGate 100F dengan FortiOS 7.2, FortiManager dan FortiAnalyzer tersedia pada management network 192.168.99.0/24
 
 ### Tujuan
 
-1. Memisahkan jaringan pengguna, server, dan manajemen ke dalam zona yang berbeda.
-2. Mengontrol akses internet berbasis kebijakan dan profil keamanan.
+1. Memisahkan user network, server, dan management ke dalam zone yang berbeda.
+2. Mengontrol akses internet berbasis policy dan security profile.
 3. Mengaktifkan pencatatan log ke FortiAnalyzer secara waktu nyata.
-4. Menyediakan prosedur pencadangan dan pemulihan konfigurasi.
+4. Menyediakan prosedur backup dan recovery konfigurasi.
 
 ### Implementasi
 
-**Tahap 1 — Antarmuka dan Zona**
+**Tahap 1 — Interface dan Zone**
 
 ```
 config system interface
@@ -1053,7 +1043,7 @@ config system zone
 end
 ```
 
-**Tahap 2 — Objek Alamat dan Kebijakan Dasar**
+**Tahap 2 — Objek Address dan Policy Dasar**
 
 ```
 config firewall address
@@ -1134,13 +1124,13 @@ config log fortianalyzer setting
 end
 ```
 
-**Tahap 4 — Pencadangan**
+**Tahap 4 — Backup**
 
 ```
 execute backup config tftp HQ-FGT-Initial-2026-11-25.conf 192.168.99.20
 ```
 
-Pencadangan terjadwal diatur melalui FortiManager dengan retensi 30 hari.
+Backup terjadwal diatur melalui FortiManager dengan retensi 30 hari.
 
 ### Operasi dan Verifikasi
 
@@ -1155,29 +1145,29 @@ get log fortianalyzer setting
 ```
 
 Verifikasi yang dilakukan:
-- Pengguna dapat mengakses internet dan aplikasi internal.
+- User dapat mengakses internet dan aplikasi internal.
 - Server DMZ tidak dapat menginisiasi koneksi ke internet.
-- Log trafik muncul di FortiAnalyzer dalam waktu kurang dari satu menit.
-- File pencadangan dapat diunduh dan dibuka.
+- Log traffic muncul di FortiAnalyzer dalam waktu kurang dari satu menit.
+- File backup dapat diunduh dan dibuka.
 
 ### Hasil dan Evaluasi
 
-Setelah implementasi, seluruh trafik internet tercatat dengan identitas kebijakan dan profil keamanan. Pemisahan zona mencegah akses langsung dari jaringan pengguna ke server manajemen. Waktu penanganan gangguan menurun karena log tersedia secara terpusat. Pencadangan konfigurasi memungkinkan pemulihan dalam waktu kurang dari 30 menit pada pengujian pemulihan.
+Setelah implementasi, seluruh internet traffic tercatat dengan identitas policy dan security profile. Pemisahan zone mencegah akses langsung dari user network ke server management. Waktu penanganan gangguan menurun karena log tersedia secara terpusat. Backup konfigurasi memungkinkan recovery dalam waktu kurang dari 30 menit pada pengujian recovery.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab | Tindakan |
 | --- | --- | --- |
-| Pengguna tidak dapat mengakses internet | Kebijakan belum mengizinkan DNS | Tambahkan layanan DNS pada kebijakan dan periksa NAT |
-| Log tidak muncul di FortiAnalyzer | Rute ke manajemen terblokir | Periksa rute dan port 514 |
-| Server tidak dapat diakses dari LAN | Objek alamat salah | Periksa subnet DMZ dan kebijakan |
+| User tidak dapat mengakses internet | Policy belum mengizinkan DNS | Tambahkan layanan DNS pada policy dan periksa NAT |
+| Log tidak muncul di FortiAnalyzer | Route ke management terblokir | Periksa route dan port 514 |
+| Server tidak dapat diakses dari LAN | Address object salah | Periksa subnet DMZ dan policy |
 
 
 ## Studi Kasus 2 — Migrasi Firewall Lama ke FortiGate Tanpa Gangguan Layanan
 
 ### Situasi
 
-Sebuah organisasi menggunakan firewall lama yang sudah mendekati akhir dukungan. Firewall tersebut memiliki 180 kebijakan, 90 objek alamat, dan 40 aturan NAT. Dokumentasi tidak lengkap. Manajemen meminta migrasi ke FortiGate tanpa menghentikan layanan selama jam kerja.
+Sebuah organisasi menggunakan firewall lama yang sudah mendekati akhir dukungan. Firewall tersebut memiliki 180 policy, 90 address object, dan 40 aturan NAT. Dokumentasi tidak lengkap. Management meminta migrasi ke FortiGate tanpa menghentikan layanan selama jam kerja.
 
 Kondisi yang dicatat:
 - Jam kerja: 08.00 sampai 17.00
@@ -1186,7 +1176,7 @@ Kondisi yang dicatat:
 
 ### Tujuan
 
-1. Memigrasikan seluruh kebijakan, objek, dan NAT dengan hasil yang setara.
+1. Memigrasikan seluruh policy, objek, dan NAT dengan hasil yang setara.
 2. Meminimalkan gangguan layanan selama migrasi.
 3. Menyediakan rencana rollback yang dapat dieksekusi dalam waktu kurang dari 15 menit.
 
@@ -1195,15 +1185,15 @@ Kondisi yang dicatat:
 **Tahap 1 — Audit dan Pemetaan**
 
 1. Ekspor konfigurasi firewall lama.
-2. Identifikasi kebijakan yang tidak pernah digunakan dalam 90 hari terakhir melalui log.
-3. Kelompokkan kebijakan berdasarkan fungsi: internet, server publik, VPN, manajemen.
-4. Buat matriks pemetaan: kebijakan lama ke kebijakan baru, objek lama ke objek baru, NAT lama ke VIP atau kebijakan NAT baru.
+2. Identifikasi policy yang tidak pernah digunakan dalam 90 hari terakhir melalui log.
+3. Kelompokkan policy berdasarkan fungsi: internet, server publik, VPN, management.
+4. Buat matriks pemetaan: policy lama ke policy baru, objek lama ke objek baru, NAT lama ke VIP atau policy NAT baru.
 
-Hasil audit: dari 180 kebijakan, 42 kebijakan tidak pernah digunakan dan tidak dimigrasikan setelah mendapat persetujuan tertulis.
+Hasil audit: dari 180 policy, 42 policy tidak pernah digunakan dan tidak dimigrasikan setelah mendapat persetujuan tertulis.
 
 **Tahap 2 — Pembangunan Paralel**
 
-FortiGate baru dipasang secara paralel, tidak langsung menggantikan firewall lama. Konfigurasi dibangun di laboratorium, kemudian diuji dengan trafik tiruan.
+FortiGate baru dipasang secara paralel, tidak langsung menggantikan firewall lama. Konfigurasi dibangun di laboratorium, kemudian diuji dengan traffic tiruan.
 
 ```
 config firewall vip
@@ -1228,16 +1218,16 @@ end
 
 **Tahap 3 — Pengujian Pra Migrasi**
 
-1. Uji setiap kebijakan dengan sumber pengujian yang menyerupai pengguna, server, dan cabang.
+1. Uji setiap policy dengan sumber pengujian yang menyerupai user, server, dan cabang.
 2. Uji VPN dengan satu cabang percontohan.
-3. Uji akses server publik dari internet melalui alamat pengujian.
-4. Catat hasil pengujian dan perbaiki kebijakan yang gagal.
+3. Uji akses server publik dari internet melalui address pengujian.
+4. Catat hasil pengujian dan perbaiki policy yang gagal.
 
 **Tahap 4 — Cutover**
 
 1. Pada jendela pemeliharaan, nonaktifkan firewall lama dan aktifkan FortiGate sebagai gateway utama.
 2. Pindahkan kabel WAN dan LAN sesuai rencana.
-3. Periksa status antarmuka, rute, VPN, dan kebijakan.
+3. Periksa status interface, route, VPN, dan policy.
 4. Lakukan pengujian layanan kritis: ERP, email, VPN, dan internet.
 
 **Tahap 5 — Rollback**
@@ -1260,22 +1250,22 @@ Verifikasi pasca migrasi dilakukan setiap 30 menit selama 4 jam pertama, kemudia
 
 ### Hasil dan Evaluasi
 
-Migrasi selesai dalam 2 jam 10 menit. Seluruh layanan kritis berfungsi. Dua kebijakan perlu diperbaiki karena objek alamat yang tidak lengkap. Waktu penanganan gangguan membaik karena FortiView menyediakan visibilitas yang tidak tersedia pada firewall lama. Kebijakan yang tidak digunakan tidak dimigrasikan sehingga jumlah kebijakan menurun dari 180 menjadi 138 dan audit menjadi lebih mudah.
+Migrasi selesai dalam 2 jam 10 menit. Seluruh layanan kritis berfungsi. Dua policy perlu diperbaiki karena address object yang tidak lengkap. Waktu penanganan gangguan membaik karena FortiView menyediakan visibilitas yang tidak tersedia pada firewall lama. Policy yang tidak digunakan tidak dimigrasikan sehingga jumlah policy menurun dari 180 menjadi 138 dan audit menjadi lebih mudah.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab | Tindakan |
 | --- | --- | --- |
-| Aplikasi ERP lambat setelah migrasi | Profil IPS memblokir trafik ERP | Buat pengecualian IPS untuk server ERP setelah verifikasi |
+| Aplikasi ERP lambat setelah migrasi | Profile IPS memblokir ERP traffic | Buat pengecualian IPS untuk server ERP setelah verifikasi |
 | VPN cabang tidak terbentuk | Proposal tidak cocok | Samakan proposal Phase 1 dan Phase 2 |
-| Email tertunda | Kebijakan SMTP belum mengizinkan relay | Periksa VIP dan kebijakan WAN ke DMZ |
+| Email tertunda | Policy SMTP belum mengizinkan relay | Periksa VIP dan policy WAN ke DMZ |
 
 
 ## Studi Kasus 3 — Implementasi High Availability dan SD-WAN Dual ISP
 
 ### Situasi
 
-Sebuah kantor cabang dengan 60 pengguna hanya menggunakan satu ISP. Ketika ISP mengalami gangguan, seluruh layanan internet dan VPN terhenti. Kantor tersebut juga hanya menggunakan satu FortiGate sehingga kegagalan perangkat menyebabkan seluruh jaringan terhenti. Manajemen meminta ketersediaan tinggi pada perangkat dan jalur internet.
+Sebuah kantor cabang dengan 60 user hanya menggunakan satu ISP. Ketika ISP mengalami gangguan, seluruh layanan internet dan VPN terhenti. Kantor tersebut juga hanya menggunakan satu FortiGate sehingga kegagalan device menyebabkan seluruh network terhenti. Management meminta ketersediaan tinggi pada device dan jalur internet.
 
 Kondisi awal:
 - FortiGate tunggal
@@ -1369,7 +1359,7 @@ config system sdwan
 end
 ```
 
-**Tahap 3 — Kebijakan dari Zona SD-WAN**
+**Tahap 3 — Policy dari Zone SD-WAN**
 
 ```
 config firewall policy
@@ -1404,33 +1394,33 @@ diagnose vpn tunnel list
 ```
 
 Pengujian failover dilakukan dengan dua cara:
-- Failover perangkat: matikan FortiGate primer, pastikan FortiGate sekunder mengambil alih dalam waktu kurang dari 10 detik dan sesi yang ada tetap berjalan.
+- Failover device: matikan FortiGate primer, pastikan FortiGate sekunder mengambil alih dalam waktu kurang dari 10 detik dan session yang ada tetap berjalan.
 - Failover jalur: simulasikan latensi tinggi pada ISP utama, pastikan aplikasi video conference berpindah ke ISP kedua secara otomatis.
 
 ### Hasil dan Evaluasi
 
-Setelah implementasi, gangguan ISP tunggal tidak lagi menghentikan layanan. Video conference berpindah jalur dalam waktu kurang dari 5 detik ketika latensi ISP utama melebihi ambang. Failover perangkat berhasil tanpa kehilangan sesi yang signifikan. Waktu henti yang sebelumnya dapat mencapai 4 jam per insiden menurun menjadi kurang dari 1 menit untuk gangguan perangkat dan jalur.
+Setelah implementasi, gangguan ISP tunggal tidak lagi menghentikan layanan. Video conference berpindah jalur dalam waktu kurang dari 5 detik ketika latensi ISP utama melebihi ambang. Failover device berhasil tanpa kehilangan session yang signifikan. Waktu henti yang sebelumnya dapat mencapai 4 jam per insiden menurun menjadi kurang dari 1 menit untuk gangguan device dan jalur.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab | Tindakan |
 | --- | --- | --- |
-| HA tidak sinkron | Versi firmware berbeda | Samakan versi FortiOS pada kedua perangkat |
+| HA tidak sinkron | Versi firmware berbeda | Samakan versi FortiOS pada kedua device |
 | SD-WAN tidak berpindah | Health-check tidak berjalan | Periksa gateway dan server health-check |
-| Sesi terputus saat failover | Session pickup tidak aktif | Aktifkan session-pickup pada konfigurasi HA |
+| Session terputus saat failover | Session pickup tidak aktif | Aktifkan session-pickup pada konfigurasi HA |
 
 
-## Studi Kasus 4 — Operasi Harian: Internet Lambat dan Tabel Sesi Penuh
+## Studi Kasus 4 — Operasi Harian: Internet Lambat dan Tabel Session Penuh
 
 ### Situasi
 
-Pada pukul 09.15, pengguna melaporkan internet lambat dan beberapa aplikasi tidak dapat dibuka. Tim NOC memeriksa FortiGate dan menemukan penggunaan CPU 92 persen dan tabel sesi mendekati batas. Tidak ada perubahan konfigurasi pada malam sebelumnya.
+Pada pukul 09.15, user melaporkan internet lambat dan beberapa aplikasi tidak dapat dibuka. Tim NOC memeriksa FortiGate dan menemukan penggunaan CPU 92 persen dan session table mendekati batas. Tidak ada perubahan konfigurasi pada malam sebelumnya.
 
 ### Tujuan
 
-1. Mengidentifikasi sumber sesi berlebihan.
-2. Memulihkan layanan tanpa menghentikan seluruh jaringan.
-3. Mencegah kejadian berulang melalui pembatasan sesi dan pemantauan.
+1. Mengidentifikasi sumber session berlebihan.
+2. Memulihkan layanan tanpa menghentikan seluruh network.
+3. Mencegah kejadian berulang melalui pembatasan session dan monitoring.
 
 ### Implementasi Operasi
 
@@ -1444,13 +1434,13 @@ diagnose sys top 1 20
 ```
 
 Hasil pemeriksaan:
-- Satu workstation 10.10.10.77 menghasilkan 45.000 sesi ke banyak alamat eksternal.
-- FortiView menunjukkan aplikasi tidak dikenal dan trafik ke port yang tidak umum.
+- Satu workstation 10.10.10.77 menghasilkan 45.000 session ke banyak address eksternal.
+- FortiView menunjukkan aplikasi tidak dikenal dan traffic ke port yang tidak umum.
 - Log IPS menunjukkan percobaan koneksi berulang.
 
 **Tahap 2 — Isolasi yang Benar**
 
-Workstation diisolasi dari jaringan melalui FortiNAC atau dengan memindahkan port switch ke VLAN karantina. Sesi dari workstation tersebut dibersihkan dengan filter, bukan dengan pembersihan seluruh tabel sesi.
+Workstation diisolasi dari network melalui FortiNAC atau dengan memindahkan port switch ke VLAN karantina. Session dari workstation tersebut dibersihkan dengan filter, bukan dengan pembersihan seluruh session table.
 
 ```
 diagnose sys session filter src 10.10.10.77
@@ -1458,11 +1448,11 @@ diagnose sys session clear
 diagnose sys session filter clear
 ```
 
-Perintah `diagnose sys session clear` tanpa filter tidak digunakan karena akan memutus seluruh sesi pengguna yang sah.
+Perintah `diagnose sys session clear` tanpa filter tidak digunakan karena akan memutus seluruh user session yang sah.
 
-**Tahap 3 — Pembatasan Sesi yang Benar**
+**Tahap 3 — Pembatasan Session yang Benar**
 
-Pembatasan dilakukan melalui DoS Policy dan Traffic Shaper yang diterapkan pada kebijakan, bukan melalui perintah yang tidak valid.
+Pembatasan dilakukan melalui DoS Policy dan Traffic Shaper yang diterapkan pada policy, bukan melalui perintah yang tidak valid.
 
 ```
 config firewall DoS-policy
@@ -1522,26 +1512,26 @@ diagnose log test
 get system performance status
 ```
 
-Setelah isolasi, CPU turun ke 28 persen dalam 5 menit. Pengguna dapat mengakses internet kembali. Workstation diserahkan ke tim keamanan untuk analisis endpoint.
+Setelah isolasi, CPU turun ke 28 persen dalam 5 menit. User dapat mengakses internet kembali. Workstation diserahkan ke tim security untuk analisis endpoint.
 
 ### Hasil dan Evaluasi
 
-Gangguan berlangsung 35 menit. Tanpa isolasi yang cepat, gangguan dapat berlangsung lebih lama dan memengaruhi seluruh pengguna. Setelah insiden, pemantauan sesi per alamat sumber ditambahkan ke dashboard harian. Ambang alert diatur pada 70 persen penggunaan CPU dan 80 persen penggunaan tabel sesi.
+Gangguan berlangsung 35 menit. Tanpa isolasi yang cepat, gangguan dapat berlangsung lebih lama dan memengaruhi seluruh user. Setelah insiden, session monitoring per source address ditambahkan ke dashboard harian. Ambang alert diatur pada 70 persen penggunaan CPU dan 80 persen penggunaan session table.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab | Tindakan |
 | --- | --- | --- |
 | CPU tinggi berulang | Satu endpoint terinfeksi | Isolasi endpoint dan periksa FortiEDR |
-| Sesi tidak berkurang | Sesi lama tidak kedaluwarsa | Sesuaikan waktu kedaluwarsa sesi |
-| Pengguna sah ikut terblokir | Pembatasan terlalu ketat | Sesuaikan ambang DoS dan traffic shaper |
+| Session tidak berkurang | Session lama tidak kedaluwarsa | Sesuaikan waktu kedaluwarsa session |
+| User sah ikut terblokir | Pembatasan terlalu ketat | Sesuaikan ambang DoS dan traffic shaper |
 
 
-## Studi Kasus 5 — Operasi Keamanan: Deteksi Malware dan Respons Insiden
+## Studi Kasus 5 — Operasi Security: Deteksi Malware dan Respons Insiden
 
 ### Situasi
 
-FortiAnalyzer mengirim alert pada pukul 14.20: deteksi IPS kritis dari workstation 10.10.10.88. Pengguna tersebut baru saja membuka lampiran email. Dalam waktu 10 menit, tiga workstation lain menunjukkan alert yang serupa.
+FortiAnalyzer mengirim alert pada pukul 14.20: deteksi IPS kritis dari workstation 10.10.10.88. User tersebut baru saja membuka lampiran email. Dalam waktu 10 menit, tiga workstation lain menunjukkan alert yang serupa.
 
 ### Tujuan
 
@@ -1603,12 +1593,12 @@ end
 
 Workstation yang terinfeksi diisolasi melalui FortiNAC dan FortiEDR.
 
-**Tahap 3 — Pemulihan**
+**Tahap 3 — Recovery**
 
 1. Workstation diisolasi dan dipindai.
-2. Akun pengguna dinonaktifkan sementara.
-3. Kata sandi pengguna diatur ulang.
-4. Workstation dipulihkan dari citra bersih, bukan dari pencadangan yang terkontaminasi.
+2. Akun user dinonaktifkan sementara.
+3. Password user diatur ulang.
+4. Workstation dipulihkan dari citra bersih, bukan dari backup yang terkontaminasi.
 
 ### Operasi dan Verifikasi
 
@@ -1625,14 +1615,14 @@ Verifikasi dilakukan dengan memeriksa:
 
 ### Hasil dan Evaluasi
 
-Penyebaran berhasil dihentikan pada empat workstation. Tidak ada server yang terinfeksi. Waktu respons dari alert pertama hingga isolasi adalah 18 menit. Setelah insiden, kebijakan FortiMail diperketat untuk memblokir makro, dan pelatihan phishing diulang untuk unit yang terdampak.
+Penyebaran berhasil dihentikan pada empat workstation. Tidak ada server yang terinfeksi. Waktu respons dari alert pertama hingga isolasi adalah 18 menit. Setelah insiden, policy FortiMail diperketat untuk memblokir makro, dan pelatihan phishing diulang untuk unit yang terdampak.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab | Tindakan |
 | --- | --- | --- |
 | Alert berulang setelah isolasi | Domain C2 belum diblokir | Blokir domain pada DNS Filter dan Web Filter |
-| Workstation bersih tetapi alert tetap muncul | Sesi lama masih aktif | Bersihkan sesi dengan filter dan periksa ulang log |
+| Workstation bersih tetapi alert tetap muncul | Session lama masih aktif | Bersihkan session dengan filter dan periksa ulang log |
 | Email phishing lolos | DMARC belum reject | Aktifkan DMARC reject setelah periode monitor |
 
 
@@ -1645,7 +1635,7 @@ Sebuah organisasi memiliki kantor pusat dan tiga kantor cabang. Setiap cabang me
 ### Tujuan
 
 1. Membangun VPN IPsec antar situs yang terpusat dan terpantau.
-2. Menyediakan SSL VPN untuk akses jarak jauh berbasis grup pengguna.
+2. Menyediakan SSL VPN untuk akses jarak jauh berbasis grup user.
 3. Membatasi akses jarak jauh hanya ke aplikasi yang diperlukan.
 
 ### Implementasi
@@ -1751,9 +1741,9 @@ config firewall policy
 end
 ```
 
-**Tahap 3 — Autentikasi Dua Faktor**
+**Tahap 3 — Authentication Dua Faktor**
 
-MFA diaktifkan untuk seluruh pengguna SSL VPN melalui FortiAuthenticator atau penyedia MFA yang digunakan organisasi. Pengguna yang belum mengaktifkan MFA tidak dapat menyelesaikan login.
+MFA diaktifkan untuk seluruh SSL VPN user melalui FortiAuthenticator atau penyedia MFA yang digunakan organisasi. User yang belum mengaktifkan MFA tidak dapat menyelesaikan login.
 
 ### Operasi dan Verifikasi
 
@@ -1768,43 +1758,44 @@ diagnose debug disable
 
 Verifikasi:
 - Terowongan IPsec aktif dan stabil selama 72 jam.
-- Pengguna SSL VPN hanya dapat mengakses server ERP, tidak dapat mengakses seluruh LAN.
-- Log VPN tercatat di FortiAnalyzer dengan identitas pengguna.
+- User SSL VPN hanya dapat mengakses server ERP, tidak dapat mengakses seluruh LAN.
+- Log VPN tercatat di FortiAnalyzer dengan identitas user.
 
 ### Hasil dan Evaluasi
 
-Seluruh cabang terhubung melalui VPN yang terpantau. Waktu penanganan gangguan VPN menurun karena status terowongan dapat dilihat dari FortiManager. Akses jarak jauh menjadi lebih aman karena dibatasi berdasarkan grup dan aplikasi. Pengguna yang mencoba mengakses di luar jam kerja akan ditolak sesuai jadwal kebijakan.
+Seluruh cabang terhubung melalui VPN yang terpantau. Waktu penanganan gangguan VPN menurun karena status terowongan dapat dilihat dari FortiManager. Akses jarak jauh menjadi lebih aman karena dibatasi berdasarkan grup dan aplikasi. User yang mencoba mengakses di luar jam kerja akan ditolak sesuai jadwal policy.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab | Tindakan |
 | --- | --- | --- |
 | Phase 1 gagal | PSK atau proposal tidak cocok | Samakan proposal dan kunci pada kedua sisi |
-| Phase 2 gagal | Selector trafik tidak cocok | Samakan jaringan sumber dan tujuan |
-| SSL VPN login berhasil tetapi tidak dapat mengakses ERP | Kebijakan salah | Periksa grup dan alamat tujuan pada kebijakan |
+| Phase 2 gagal | Selector traffic tidak cocok | Samakan network sumber dan tujuan |
+| SSL VPN login berhasil tetapi tidak dapat mengakses ERP | Policy salah | Periksa grup dan destination address pada policy |
 | VPN sering terputus | DPD atau NAT timeout | Sesuaikan DPD dan waktu kedaluwarsa |
 
+---
 
 ## Studi Kasus 7 — Implementasi DMZ, Server Publik, dan Proteksi Aplikasi Web
 
 ### Situasi
 
-Sebuah organisasi menyediakan portal pelanggan melalui internet. Portal tersebut sebelumnya berada pada jaringan yang sama dengan pengguna internal. Pemindaian keamanan menemukan kerentanan SQL injection dan percobaan brute force pada halaman login. Manajemen meminta pemisahan DMZ dan proteksi aplikasi web.
+Sebuah organisasi menyediakan portal pelanggan melalui internet. Portal tersebut sebelumnya berada pada network yang sama dengan user internal. Scanning security menemukan kerentanan SQL injection dan percobaan brute force pada halaman login. Management meminta pemisahan DMZ dan proteksi aplikasi web.
 
 ### Tujuan
 
 1. Memindahkan server web ke DMZ yang terisolasi.
-2. Mengontrol akses dari internet ke DMZ melalui VIP dan kebijakan yang ketat.
+2. Mengontrol akses dari internet ke DMZ melalui VIP dan policy yang ketat.
 3. Mengaktifkan proteksi aplikasi web dan pembatasan laju permintaan.
-4. Mencegah akses dari DMZ ke jaringan internal kecuali yang diizinkan.
+4. Mencegah akses dari DMZ ke internal network kecuali yang diizinkan.
 
 ### Implementasi
 
 **Tahap 1 — Pemindahan Server ke DMZ**
 
-Server web dipindahkan ke 172.16.10.10 pada DMZ. Akses manajemen ke server hanya diizinkan dari jaringan manajemen melalui jump host.
+Server web dipindahkan ke 172.16.10.10 pada DMZ. Akses management ke server hanya diizinkan dari management network melalui jump host.
 
-**Tahap 2 — VIP dan Kebijakan WAN ke DMZ**
+**Tahap 2 — VIP dan Policy WAN ke DMZ**
 
 ```
 config firewall vip
@@ -1868,10 +1859,10 @@ Konfigurasi FortiWeb yang diterapkan:
 - Virtual Server: 203.0.113.2:443 ke Server Pool 172.16.10.10:443
 - WAF Profile: OWASP Top 10 Block
 - Signature: High Severity Block, Medium Severity Alert
-- Rate Limit: maksimum 100 permintaan per menit per alamat sumber untuk halaman login
-- Brute Force Protection: blokir alamat sumber setelah 5 upaya login gagal dalam 5 menit
+- Rate Limit: maksimum 100 permintaan per menit per source address untuk halaman login
+- Brute Force Protection: blokir source address setelah 5 upaya login gagal dalam 5 menit
 
-**Tahap 4 — Pembatasan Akses Manajemen**
+**Tahap 4 — Pembatasan Akses Management**
 
 ```
 config firewall policy
@@ -1905,17 +1896,16 @@ Verifikasi yang dilakukan:
 
 ### Hasil dan Evaluasi
 
-Setelah implementasi, upaya SQL injection menurun dan tidak ada lagi upaya yang berhasil mencapai server. Brute force pada halaman login berhasil dibatasi. Audit keamanan menyatakan pemisahan DMZ telah memenuhi standar. Waktu respons terhadap serangan aplikasi web meningkat karena log FortiWeb tersedia di FortiAnalyzer.
+Setelah implementasi, upaya SQL injection menurun dan tidak ada lagi upaya yang berhasil mencapai server. Brute force pada halaman login berhasil dibatasi. Audit security menyatakan pemisahan DMZ telah memenuhi sindikasird. Waktu respons terhadap web application attack meningkat karena log FortiWeb tersedia di FortiAnalyzer.
 
 ### Penyelesaian Masalah
 
 | Gejala | Penyebab | Tindakan |
 | --- | --- | --- |
-| Portal tidak dapat diakses | VIP atau kebijakan salah | Periksa VIP, kebijakan, dan rute |
-| Pengguna sah diblokir FortiWeb | False positive | Periksa log FortiWeb dan sesuaikan aturan |
-| Server DMZ dapat mengakses internet | Kebijakan deny tidak berada di akhir | Tempatkan kebijakan deny setelah kebijakan yang diizinkan |
-| Database tidak dapat diakses dari DMZ | Port tidak diizinkan | Periksa kebijakan DMZ ke LAN |
-
+| Portal tidak dapat diakses | VIP atau policy salah | Periksa VIP, policy, dan route |
+| User sah diblokir FortiWeb | False positive | Periksa log FortiWeb dan sesuaikan aturan |
+| Server DMZ dapat mengakses internet | Policy deny tidak berada di akhir | Tempatkan policy deny setelah policy yang diizinkan |
+| Database tidak dapat diakses dari DMZ | Port tidak diizinkan | Periksa policy DMZ ke LAN |
 
 # Bagian 3 — Contoh Konfigurasi FortiOS v6 dan v7
 
@@ -1923,12 +1913,12 @@ Setelah implementasi, upaya SQL injection menurun dan tidak ada lagi upaya yang 
 
 | Aspek | FortiOS v6.4 | FortiOS v7.0, v7.2, v7.4 |
 | --- | --- | --- |
-| Mode Kebijakan | Profile-Based dan Policy-Based tersedia, Profile-Based masih umum | Policy-Based semakin dianjurkan, manajemen profil lebih terintegrasi |
+| Mode Policy | Profile-Based dan Policy-Based tersedia, Profile-Based masih umum | Policy-Based semakin dianjurkan, management profile lebih terintegrasi |
 | SSL VPN | Konfigurasi melalui `vpn ssl settings` dan `firewall policy` dengan `ssl.root` | Sintaks dasar sama, tetapi ZTNA dan Access Proxy semakin diprioritaskan sebagai pengganti SSL VPN untuk akses aplikasi |
 | SD-WAN | `system sdwan` dengan `health-check` dan `service` | Struktur sama, penambahan `sla` yang lebih rinci, `performance SLA` dan integrasi dengan BGP lebih baik |
 | ZTNA | Belum tersedia secara penuh pada v6.2, mulai diperkenalkan pada v6.4 | Tersedia penuh melalui `firewall access-proxy`, `proxy-policy`, dan tag endpoint |
-| Inspeksi SSL | `ssl-ssh-profile` dengan `certificate-inspection` dan `deep-inspection` | Konsep sama, penambahan dukungan TLS 1.3 dan profil yang lebih granular |
-| FortiManager | ADOM berbasis versi, Policy Package | ADOM dan Policy Package tetap digunakan, dengan validasi kebijakan yang lebih ketat |
+| SSL inspection | `ssl-ssh-profile` dengan `certificate-inspection` dan `deep-inspection` | Konsep sama, penambahan dukungan TLS 1.3 dan profile yang lebih granular |
+| FortiManager | ADOM berbasis versi, Policy Package | ADOM dan Policy Package tetap digunakan, dengan validasi policy yang lebih ketat |
 | Log dan Diagnostik | `diagnose debug flow` dan `diagnose vpn` | Perintah diagnostik sama, penambahan `diagnose wad` dan `diagnose endpoint` untuk ZTNA |
 
 Catatan penting: perbedaan sintaks pada dokumen ini difokuskan pada perubahan yang berdampak pada implementasi dan operasi. Perintah yang tidak berubah ditulis identik pada kedua versi agar mudah dibandingkan.
@@ -1936,16 +1926,16 @@ Catatan penting: perbedaan sintaks pada dokumen ini difokuskan pada perubahan ya
 ## Konvensi Penulisan
 
 - `HQ-FGT` menunjukkan FortiGate pusat.
-- Alamat yang digunakan bersifat contoh:
+- Address yang digunakan bersifat contoh:
   - WAN: 203.0.113.2/30, gateway 203.0.113.1
   - LAN: 10.10.10.1/24
   - DMZ: 172.16.10.1/24
-  - Manajemen: 192.168.99.1/24, FortiManager 192.168.99.10, FortiAnalyzer 192.168.99.11
+  - Management: 192.168.99.1/24, FortiManager 192.168.99.10, FortiAnalyzer 192.168.99.11
   - Cabang: LAN 10.20.20.0/24, WAN 203.0.113.6/30
 - Setiap bagian menampilkan konfigurasi v6 terlebih dahulu, kemudian konfigurasi v7, kemudian catatan perbedaan.
-- Nilai kata sandi dan kunci bersama ditulis sebagai `<kata-sandi-kuat>` dan harus diganti sesuai standar organisasi.
+- Nilai password dan pre-shared key ditulis sebagai `<kata-sandi-kuat>` dan harus diganti sesuai sindikasird organisasi.
 
-## 1. Antarmuka dan Zona
+## 1. Interface dan Zone
 
 ### FortiOS v6.4
 
@@ -2023,7 +2013,7 @@ end
 
 ### Catatan Perbedaan
 
-Konfigurasi antarmuka dan zona identik pada v6 dan v7. Perbedaan terletak pada validasi antarmuka grafis. Pada v7, FortiGate memberikan peringatan apabila antarmuka yang sudah menjadi anggota zona digunakan secara langsung pada kebijakan.
+Konfigurasi interface dan zone identik pada v6 dan v7. Perbedaan terletak pada validasi GUI. Pada v7, FortiGate memberikan peringatan apabila interface yang sudah menjadi anggota zone digunakan secara langsung pada policy.
 
 ### Verifikasi
 
@@ -2033,7 +2023,7 @@ get system zone
 diagnose hardware deviceinfo nic port1
 ```
 
-## 2. Objek Alamat dan Layanan
+## 2. Objek Address dan Layanan
 
 ### FortiOS v6.4 dan v7.2 / v7.4 — Sintaks Sama
 
@@ -2068,7 +2058,7 @@ end
 
 ### Catatan Perbedaan
 
-Sintaks objek alamat tidak berubah. Pada v7, FortiManager melakukan validasi objek yang tidak digunakan dan memberikan rekomendasi pembersihan. Objek FQDN pada v7 mendukung pembaruan DNS yang lebih cepat.
+Sintaks address object tidak berubah. Pada v7, FortiManager melakukan validasi objek yang tidak digunakan dan memberikan rekomendasi pembersihan. Objek FQDN pada v7 mendukung pembaruan DNS yang lebih cepat.
 
 ### Verifikasi
 
@@ -2078,7 +2068,7 @@ get firewall addrgrp
 diagnose firewall iprope list 100015
 ```
 
-## 3. Kebijakan Firewall dan NAT
+## 3. Firewall Policy dan NAT
 
 ### FortiOS v6.4 — Profile-Based
 
@@ -2132,7 +2122,7 @@ end
 
 ### Catatan Perbedaan
 
-Perintah dasar kebijakan sama. Perbedaan utama terletak pada cara FortiOS v7 menangani profil. Pada v7, FortiGate memberikan peringatan apabila kebijakan menggunakan profil yang tidak konsisten dengan mode inspeksi. Pada v6, kesalahan tersebut sering baru terlihat pada log.
+Perintah dasar policy sama. Perbedaan utama terletak pada cara FortiOS v7 menangani profile. Pada v7, FortiGate memberikan peringatan apabila policy menggunakan profile yang tidak konsisten dengan mode inspection. Pada v6, kesalahan tersebut sering baru terlihat pada log.
 
 ### Verifikasi
 
@@ -2189,7 +2179,7 @@ end
 
 ### Catatan Perbedaan
 
-Sintaks VIP dan IP Pool identik. Pada v7, FortiGate memberikan visualisasi yang lebih jelas pada antarmuka grafis untuk VIP yang tidak memiliki kebijakan yang merujuk. Hal ini membantu audit kebijakan DNAT.
+Sintaks VIP dan IP Pool identik. Pada v7, FortiGate memberikan visualisasi yang lebih jelas pada GUI untuk VIP yang tidak memiliki policy yang merujuk. Hal ini membantu audit policy DNAT.
 
 ### Verifikasi
 
@@ -2199,7 +2189,7 @@ get firewall ippool
 diagnose firewall iprope list 100015
 ```
 
-## 5. Rute Statis dan BGP
+## 5. Route Statis dan BGP
 
 ### FortiOS v6.4 dan v7.2 / v7.4 — Sintaks Sama
 
@@ -2235,7 +2225,7 @@ end
 
 ### Catatan Perbedaan
 
-Konfigurasi rute statis dan BGP tidak berubah. Pada v7, integrasi BGP dengan SD-WAN lebih baik. Rute BGP dapat digunakan sebagai dasar pemilihan jalur SD-WAN.
+Konfigurasi static route dan BGP tidak berubah. Pada v7, integrasi BGP dengan SD-WAN lebih baik. Route BGP dapat digunakan sebagai dasar pemilihan jalur SD-WAN.
 
 ### Verifikasi
 
@@ -2291,7 +2281,7 @@ end
 
 ### Catatan Perbedaan
 
-Sintaks IPsec identik. Pada v7, FortiGate mendukung IKEv2 dengan DPD yang lebih stabil dan integrasi dengan SD-WAN overlay. Pada v6, penggunaan `net-device disable` sering diperlukan untuk rute berbasis kebijakan. Pada v7, pendekatan berbasis rute lebih dianjurkan.
+Sintaks IPsec identik. Pada v7, FortiGate mendukung IKEv2 dengan DPD yang lebih stabil dan integrasi dengan SD-WAN overlay. Pada v6, penggunaan `net-device disable` sering diperlukan untuk route berbasis policy. Pada v7, pendekatan berbasis route lebih dianjurkan.
 
 ### Verifikasi
 
@@ -2304,7 +2294,7 @@ diagnose debug enable
 diagnose debug disable
 ```
 
-## 7. SSL VPN dan Autentikasi
+## 7. SSL VPN dan Authentication
 
 ### FortiOS v6.4 — SSL VPN
 
@@ -2378,7 +2368,7 @@ end
 
 ### Catatan Perbedaan
 
-Perbedaan terbesar terletak pada pendekatan akses jarak jauh. Pada v6, SSL VPN merupakan pendekatan utama. Pada v7, ZTNA diperkenalkan sebagai pendekatan berbasis identitas dan postur perangkat. ZTNA tidak memberikan akses jaringan penuh, melainkan akses per aplikasi. Hal ini mengurangi permukaan serangan.
+Perbedaan terbesar terletak pada pendekatan akses jarak jauh. Pada v6, SSL VPN merupakan pendekatan utama. Pada v7, ZTNA diperkenalkan sebagai pendekatan berbasis identitas dan postur device. ZTNA tidak memberikan akses network penuh, melainkan akses per aplikasi. Hal ini mengurangi attack surface.
 
 ### Verifikasi
 
@@ -2389,7 +2379,7 @@ diagnose endpoint record list
 diagnose debug application sslvpn -1
 ```
 
-## 8. Profil Keamanan: Antivirus, IPS, Web Filter, Application Control, DNS Filter
+## 8. Profile Security: Antivirus, IPS, Web Filter, Application Control, DNS Filter
 
 ### FortiOS v6.4
 
@@ -2487,7 +2477,7 @@ end
 
 ### Catatan Perbedaan
 
-Sintaks profil keamanan pada dasarnya sama. Pada v7, database IPS, antivirus, dan Application Control diperbarui lebih cepat dan mendukung TLS 1.3. Pada v7, opsi `block-malicious-url` dan `scan-botnet-connections` tersedia langsung pada sensor dan harus diaktifkan secara eksplisit.
+Sintaks security profile pada dasarnya sama. Pada v7, database IPS, antivirus, dan Application Control diperbarui lebih cepat dan mendukung TLS 1.3. Pada v7, opsi `block-malicious-url` dan `scan-botnet-connections` tersedia langsung pada sensor dan harus diaktifkan secara eksplisit.
 
 ### Verifikasi
 
@@ -2558,7 +2548,7 @@ end
 
 ### Catatan Perbedaan
 
-Struktur SD-WAN sama. Pada v7, FortiGate mendukung lebih banyak health-check dan integrasi dengan overlay VPN. Pada v7, aturan SD-WAN dapat menggunakan Application Control sebagai kriteria pemilihan jalur, bukan hanya alamat tujuan.
+Struktur SD-WAN sama. Pada v7, FortiGate mendukung lebih banyak health-check dan integrasi dengan overlay VPN. Pada v7, aturan SD-WAN dapat menggunakan Application Control sebagai kriteria pemilihan jalur, bukan hanya destination address.
 
 ### Verifikasi
 
@@ -2594,7 +2584,7 @@ end
 
 ### Catatan Perbedaan
 
-Konfigurasi HA identik. Pada v7, sinkronisasi konfigurasi lebih cepat dan FortiGate memberikan peringatan apabila versi firmware kedua perangkat tidak sama. Pada v7, mode Active-Active mendukung load balancing yang lebih baik untuk trafik yang tidak memerlukan inspeksi stateful yang ketat.
+Konfigurasi HA identik. Pada v7, sinkronisasi konfigurasi lebih cepat dan FortiGate memberikan peringatan apabila versi firmware kedua device tidak sama. Pada v7, mode Active-Active mendukung load balancing yang lebih baik untuk traffic yang tidak memerlukan inspection stateful yang ketat.
 
 ### Verifikasi
 
@@ -2604,7 +2594,7 @@ diagnose sys ha status
 diagnose sys ha checksum show
 ```
 
-## 11. Administrasi, Logging, dan Pencadangan
+## 11. Administrasi, Logging, dan Backup
 
 ### FortiOS v6.4 dan v7.2 / v7.4
 
@@ -2646,9 +2636,9 @@ end
 
 ### Catatan Perbedaan
 
-Perintah administrasi sama. Pada v7, opsi `reliable enable` pada FortiAnalyzer lebih dianjurkan untuk memastikan log tidak hilang saat koneksi terputus. Pada v7, FortiManager melakukan validasi kebijakan yang lebih ketat sebelum instalasi.
+Perintah administrasi sama. Pada v7, opsi `reliable enable` pada FortiAnalyzer lebih dianjurkan untuk memastikan log tidak hilang saat koneksi terputus. Pada v7, FortiManager melakukan validasi policy yang lebih ketat sebelum instalasi.
 
-### Verifikasi dan Pencadangan
+### Verifikasi dan Backup
 
 ```
 get system central-management
@@ -2792,16 +2782,16 @@ end
 
 ### Catatan Perbedaan pada Konfigurasi Lengkap
 
-Konfigurasi v7 menambahkan `application-list` dan `ssl-ssh-profile` secara eksplisit pada kebijakan. Pada v6, kedua profil tersebut sering ditambahkan pada tahap lanjutan. Pada v7, penerapan profil secara eksplisit lebih dianjurkan agar kebijakan mudah diaudit.
+Konfigurasi v7 menambahkan `application-list` dan `ssl-ssh-profile` secara eksplisit pada policy. Pada v6, kedua profile tersebut sering ditambahkan pada tahap lanjutan. Pada v7, penerapan profile secara eksplisit lebih dianjurkan agar policy mudah diaudit.
 
 ### Jalur Peningkatan Versi
 
 | Dari | Ke | Catatan |
 | --- | --- | --- |
 | 6.2.x | 6.4.x | Periksa kompatibilitas FortiManager dan FortiAnalyzer |
-| 6.4.x | 7.0.x | Cadangkan konfigurasi dan periksa kebijakan yang menggunakan SSL VPN lama |
-| 7.0.x | 7.2.x | Periksa profil ZTNA dan SD-WAN |
-| 7.2.x | 7.4.x | Periksa kompatibilitas perangkat keras dan lisensi |
+| 6.4.x | 7.0.x | Cadangkan konfigurasi dan periksa policy yang menggunakan SSL VPN lama |
+| 7.0.x | 7.2.x | Periksa profile ZTNA dan SD-WAN |
+| 7.2.x | 7.4.x | Periksa kompatibilitas hardware dan lisensi |
 
 Peningkatan harus dilakukan secara bertahap sesuai jalur resmi. Peningkatan langsung dari 6.2 ke 7.4 tidak dianjurkan.
 
@@ -2822,13 +2812,12 @@ diagnose autoupdate versions
 
 | Gejala | Tindakan |
 | --- | --- |
-| Kebijakan tidak bekerja | Periksa mode inspeksi dan profil yang digunakan |
-| VPN tidak terbentuk | Periksa proposal dan kunci bersama |
+| Policy tidak bekerja | Periksa mode inspection dan profile yang digunakan |
+| VPN tidak terbentuk | Periksa proposal dan pre-shared key |
 | Log tidak sampai ke FortiAnalyzer | Periksa server FortiAnalyzer dan opsi reliable |
 | HA tidak sinkron | Samakan versi firmware dan periksa heartbeat |
 
-
-# Lampiran — Perintah Diagnostik dan Standar Penamaan
+# Lampiran — Perintah Diagnostik dan Sindikasird Penamaan
 
 ## Perintah Diagnostik Umum
 
