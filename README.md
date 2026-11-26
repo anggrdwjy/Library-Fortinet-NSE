@@ -2,21 +2,21 @@
 
 ## Daftar Isi
 
-- [Modul 1. NSE 1 - Cybersecurity Fundamentals](https://github.com/anggrdwjy/Library-Fortinet-NSE/blob/main/README.md#modul-1-nse-1---cybersecurity-fundamentals)
-- [Modul 2. NSE 2 - NGFW Basics]
-- [Modul 3. NSE 3 - FortiGate Operator]
-- [Modul 4. NSE 4 - FortiOS Administrator]
-- [Modul 5. NSE 5 - Secure Networking atau SASE Administrator]
-- [Modul 6. NSE 6 - Advanced Endpoint Protection dan Data Security]
-- [Modul 7. NSE 7 - Specialized Expert Tracks]
-- [Modul 8. NSE 8 - Expert Design dan Troubleshooting]
-- [Studi Kasus 1. Implementasi FortiGate Baru untuk Kantor Pusat]
-- [Studi Kasus 2. Migrasi Firewall Lama ke FortiGate Tanpa Gangguan Layanan]
-- [Studi Kasus 3. Implementasi High Availability dan SD-WAN Dual ISP]
-- [Studi Kasus 4. Operasi Harian: Internet Lambat dan Tabel Session Penuh]
-- [Studi Kasus 5. Operasi Security: Deteksi Malware dan Respons Insiden]
-- [Studi Kasus 6. Implementasi VPN Antar Cabang dan Akses Jarak Jauh]
-- [Studi Kasus 7. Implementasi DMZ, Server Publik, dan Proteksi Aplikasi Web]
+- [Modul 1. NSE 1 - Cybersecurity Fundamentals]( #modul-1-nse-1---cybersecurity-fundamentals)
+- [Modul 2. NSE 2 - NGFW Basics]( #modul-2-nse-2---ngfw-basics)
+- [Modul 3. NSE 3 - FortiGate Operator]( #modul-3-nse-3---fortigate-operator)
+- [Modul 4. NSE 4 - FortiOS Administrator]( #modul-4-nse-4---fortios-administrator)
+- [Modul 5. NSE 5 - Secure Networking atau SASE Administrator]( #modul-5-nse-5---secure-networking-atau-sase-administrator)
+- [Modul 6. NSE 6 - Advanced Endpoint Protection dan Data Security]( #modul-6-nse-6---advanced-endpoint-protection-dan-data-security)
+- [Modul 7. NSE 7 - Specialized Expert Tracks]( #modul-7-nse-7---specialized-expert-tracks)
+- [Modul 8. NSE 8 - Expert Design dan Troubleshooting]( #modul-8-nse-8---expert-design-dan-troubleshooting)
+- [Studi Kasus 1. Implementasi FortiGate Baru untuk Kantor Pusat]( #studi-kasus-1-implementasi-fortigate-baru-untuk-kantor-pusat)
+- [Studi Kasus 2. Migrasi Firewall Lama ke FortiGate Tanpa Gangguan Layanan]( #studi-kasus-2-migrasi-firewall-lama-ke-fortigate-tanpa-gangguan-layanan)
+- [Studi Kasus 3. Implementasi High Availability dan SD-WAN Dual ISP]( #studi-kasus-3-implementasi-high-availability-dan-sd-wan-dual-isp)
+- [Studi Kasus 4. Operasi Harian: Internet Lambat dan Tabel Session Penuh]( #studi-kasus-4-operasi-harian-internet-lambat-dan-tabel-session-penuh)
+- [Studi Kasus 5. Operasi Security: Deteksi Malware dan Respons Insiden]( #studi-kasus-5-operasi-security-deteksi-malware-dan-respons-insiden)
+- [Studi Kasus 6. Implementasi VPN Antar Cabang dan Akses Jarak Jauh]( #studi-kasus-6-implementasi-vpn-antar-cabang-dan-akses-jarak-jauh)
+- [Studi Kasus 7. Implementasi DMZ, Server Publik, dan Proteksi Aplikasi Web]( #studi-kasus-7-implementasi-dmz-server-publik-dan-proteksi-aplikasi-web)
 
 ## Modul 1. NSE 1 - Cybersecurity Fundamentals
 
