@@ -1,4 +1,4 @@
-# Panduan Lengkap Implementasi dan Operasi NSE 1–8, Studi Kasus Firewall, dan Contoh Konfigurasi FortiOS v6 dan v7
+# Implementation and Operation NSE 1–8, Study Case Firewall FortiOS v6 dan v7
 
 ## Daftar Isi
 
