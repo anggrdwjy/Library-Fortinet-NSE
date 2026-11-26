@@ -2,7 +2,7 @@
 
 ## Daftar Isi
 
-- [Modul 1. NSE 1 - Cybersecurity Fundamentals]
+- [Modul 1. NSE 1 - Cybersecurity Fundamentals](https://github.com/anggrdwjy/Library-Fortinet-NSE/blob/main/README.md#modul-1-nse-1---cybersecurity-fundamentals)
 - [Modul 2. NSE 2 - NGFW Basics]
 - [Modul 3. NSE 3 - FortiGate Operator]
 - [Modul 4. NSE 4 - FortiOS Administrator]
@@ -78,7 +78,7 @@ Rendah    : Spam, scanning port tunggal, upaya phishing yang gagal
 | Backup ikut terenkripsi | Backup terhubung terus menerus | Terapkan isolated backup dan uji recovery |
 
 
-## Modul 2 — NSE 2: NGFW Basics
+## Modul 2. NSE 2 - NGFW Basics
 
 ### Tujuan
 
@@ -167,7 +167,7 @@ Periksa FortiView untuk melihat aplikasi teratas, sumber teratas, dan threat ter
 | Kinerja menurun setelah inspection | Mode proxy digunakan pada device kecil | Gunakan flow-based inspection dan sesuaikan profile |
 
 
-## Modul 3 — NSE 3: FortiGate Operator
+## Modul 3. NSE 3 - FortiGate Operator
 
 ### Tujuan
 
@@ -254,7 +254,7 @@ Periksa setiap hari: status HA, status lisensi, status disk log, penggunaan CPU 
 | Firmware gagal diperbarui | Jalur peningkatan tidak berurutan | Ikuti jalur peningkatan resmi FortiOS |
 
 
-## Modul 4 — NSE 4: FortiOS Administrator
+## Modul 4. NSE 4 - FortiOS Administrator
 
 Modul ini merupakan inti sertifikasi. Seluruh implementasi di modul lain bergantung pada kemampuan administrasi FortiOS yang dikuasai pada modul ini.
 
@@ -574,7 +574,7 @@ diagnose firewall proute list
 | HA tidak sinkron | Versi firmware berbeda | Samakan versi dan periksa heartbeat |
 | SSL VPN login gagal | Grup user salah | Periksa grup pada policy dan portal |
 
-## Modul 5 — NSE 5: Secure Networking atau SASE Administrator
+## Modul 5. NSE 5 - Secure Networking atau SASE Administrator
 
 ### Tujuan
 
@@ -682,7 +682,7 @@ Periksa status instalasi Policy Package di FortiManager. Pastikan tidak ada Fort
 | Log tidak muncul di FortiAnalyzer | ADOM tidak cocok | Samakan ADOM dan device terkelola |
 | ZTNA ditolak | Tag endpoint tidak sesuai | Periksa profile EMS dan tag endpoint |
 
-## Modul 6 — NSE 6: Advanced Endpoint Protection dan Data Security
+## Modul 6. NSE 6 - Advanced Endpoint Protection dan Data Security
 
 ### Tujuan
 
@@ -774,7 +774,7 @@ Signature: High Severity Block, Medium Severity Alert
 | Device IoT tidak mendapat akses | Profile device salah | Periksa klasifikasi FortiNAC |
 
 
-## Modul 7 — NSE 7: Specialized Expert Tracks
+## Modul 7. NSE 7 - Specialized Expert Tracks
 
 ### Tujuan
 
@@ -910,7 +910,7 @@ diagnose debug flow filter daddr 172.16.10.10
 | Biaya WAN meningkat | Aturan SD-WAN salah | Periksa prioritas anggota dan mode |
 
 
-## Modul 8 — NSE 8: Expert Design dan Troubleshooting
+## Modul 8. NSE 8 - Expert Design dan Troubleshooting
 
 ### Tujuan
 
@@ -992,9 +992,7 @@ diagnose log test
 | Masalah setelah perubahan | Kembalikan perubahan terakhir dan uji secara bertahap |
 
 
-# Bagian 2 — Studi Kasus Implementasi dan Operasi Firewall
-
-## Studi Kasus 1 — Implementasi FortiGate Baru untuk Kantor Pusat
+## Studi Kasus 1. Implementasi FortiGate Baru untuk Kantor Pusat
 
 ### Situasi
 
@@ -1179,7 +1177,7 @@ Setelah implementasi, seluruh internet traffic tercatat dengan identitas policy 
 | Server tidak dapat diakses dari LAN | Address object salah | Periksa subnet DMZ dan policy |
 
 
-## Studi Kasus 2 — Migrasi Firewall Lama ke FortiGate Tanpa Gangguan Layanan
+## Studi Kasus 2. Migrasi Firewall Lama ke FortiGate Tanpa Gangguan Layanan
 
 ### Situasi
 
@@ -1277,7 +1275,7 @@ Migrasi selesai dalam 2 jam 10 menit. Seluruh layanan kritis berfungsi. Dua poli
 | Email tertunda | Policy SMTP belum mengizinkan relay | Periksa VIP dan policy WAN ke DMZ |
 
 
-## Studi Kasus 3 — Implementasi High Availability dan SD-WAN Dual ISP
+## Studi Kasus 3. Implementasi High Availability dan SD-WAN Dual ISP
 
 ### Situasi
 
@@ -1426,7 +1424,7 @@ Setelah implementasi, gangguan ISP tunggal tidak lagi menghentikan layanan. Vide
 | Session terputus saat failover | Session pickup tidak aktif | Aktifkan session-pickup pada konfigurasi HA |
 
 
-## Studi Kasus 4 — Operasi Harian: Internet Lambat dan Tabel Session Penuh
+## Studi Kasus 4. Operasi Harian: Internet Lambat dan Tabel Session Penuh
 
 ### Situasi
 
@@ -1543,7 +1541,7 @@ Gangguan berlangsung 35 menit. Tanpa isolasi yang cepat, gangguan dapat berlangs
 | User sah ikut terblokir | Pembatasan terlalu ketat | Sesuaikan ambang DoS dan traffic shaper |
 
 
-## Studi Kasus 5 — Operasi Security: Deteksi Malware dan Respons Insiden
+## Studi Kasus 5. Operasi Security: Deteksi Malware dan Respons Insiden
 
 ### Situasi
 
@@ -1642,7 +1640,7 @@ Penyebaran berhasil dihentikan pada empat workstation. Tidak ada server yang ter
 | Email phishing lolos | DMARC belum reject | Aktifkan DMARC reject setelah periode monitor |
 
 
-## Studi Kasus 6 — Implementasi VPN Antar Cabang dan Akses Jarak Jauh
+## Studi Kasus 6. Implementasi VPN Antar Cabang dan Akses Jarak Jauh
 
 ### Situasi
 
@@ -1792,7 +1790,7 @@ Seluruh cabang terhubung melalui VPN yang terpantau. Waktu penanganan gangguan V
 
 ---
 
-## Studi Kasus 7 — Implementasi DMZ, Server Publik, dan Proteksi Aplikasi Web
+## Studi Kasus 7. Implementasi DMZ, Server Publik, dan Proteksi Aplikasi Web
 
 ### Situasi
 
