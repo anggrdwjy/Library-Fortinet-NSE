@@ -1,10 +1,22 @@
 # Panduan Lengkap Implementasi dan Operasi NSE 1–8, Studi Kasus Firewall, dan Contoh Konfigurasi FortiOS v6 dan v7
 
-## Daftar Isi
+## Daftar Isic
 
-- [Bagian 1 — Panduan Implementasi dan Operasi NSE 1–8](https://github.com/anggrdwjy/Library-Fortinet-NSE/blob/main/README.md#bagian-1--panduan-implementasi-dan-operasi-nse-18)
-- [Bagian 2 — Studi Kasus Implementasi dan Operasi Firewall](https://github.com/anggrdwjy/Library-Fortinet-NSE/blob/main/README.md#bagian-2--studi-kasus-implementasi-dan-operasi-firewall)
-- [Bagian 3 — Contoh Konfigurasi FortiOS v6 dan v7](https://github.com/anggrdwjy/Library-Fortinet-NSE/blob/main/README.md#bagian-3--contoh-konfigurasi-fortios-v6-dan-v7)
+- [Modul 1. NSE 1 - Cybersecurity Fundamentals]
+- [Modul 2. NSE 2 - NGFW Basics]
+- [Modul 3. NSE 3 - FortiGate Operator]
+- [Modul 4. NSE 4 - FortiOS Administrator]
+- [Modul 5. NSE 5 - Secure Networking atau SASE Administrator]
+- [Modul 6. NSE 6 - Advanced Endpoint Protection dan Data Security]
+- [Modul 7. NSE 7 - Specialized Expert Tracks]
+- [Modul 8. NSE 8 - Expert Design dan Troubleshooting]
+- [Studi Kasus 1. Implementasi FortiGate Baru untuk Kantor Pusat]
+- [Studi Kasus 2. Migrasi Firewall Lama ke FortiGate Tanpa Gangguan Layanan]
+- [Studi Kasus 3. Implementasi High Availability dan SD-WAN Dual ISP]
+- [Studi Kasus 4. Operasi Harian: Internet Lambat dan Tabel Session Penuh]
+- [Studi Kasus 5. Operasi Security: Deteksi Malware dan Respons Insiden]
+- [Studi Kasus 6. Implementasi VPN Antar Cabang dan Akses Jarak Jauh]
+- [Studi Kasus 7. Implementasi DMZ, Server Publik, dan Proteksi Aplikasi Web]
 
 # Bagian 1 — Panduan Implementasi dan Operasi NSE 1–8
 
