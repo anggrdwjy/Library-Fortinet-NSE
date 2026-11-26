@@ -1,6 +1,6 @@
 # Panduan Lengkap Implementasi dan Operasi NSE 1–8, Studi Kasus Firewall, dan Contoh Konfigurasi FortiOS v6 dan v7
 
-## Daftar Isic
+## Daftar Isi
 
 - [Modul 1. NSE 1 - Cybersecurity Fundamentals]
 - [Modul 2. NSE 2 - NGFW Basics]
@@ -18,9 +18,7 @@
 - [Studi Kasus 6. Implementasi VPN Antar Cabang dan Akses Jarak Jauh]
 - [Studi Kasus 7. Implementasi DMZ, Server Publik, dan Proteksi Aplikasi Web]
 
-# Bagian 1 — Panduan Implementasi dan Operasi NSE 1–8
-
-## Modul 1 — NSE 1: Cybersecurity Fundamentals
+## Modul 1. NSE 1 - Cybersecurity Fundamentals
 
 ### Tujuan
 
